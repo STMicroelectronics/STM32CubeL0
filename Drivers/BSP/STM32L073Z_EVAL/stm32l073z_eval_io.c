@@ -1,0 +1,266 @@
+/**
+  ******************************************************************************
+  * @file    stm32l073z_eval_io.c
+  * @author  MCD Application Team
+  * @brief   This file provides a set of functions needed to manage the IO pins
+  *          on STM32L073Z-EVAL evaluation board.
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright(c) 2016 STMicroelectronics.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  */ 
+
+/* File Info : -----------------------------------------------------------------
+                                   User NOTES
+1. How To use this driver:
+--------------------------
+   - This driver is used to drive the IO module of the STM32L073Z-EVAL evaluation
+     board.
+   - The MFXSTM32L152 IO expander device component driver must be included with this 
+     driver in order to run the IO functionalities commanded by the IO expander 
+     device mounted on the evaluation board.
+
+2. Driver description:
+---------------------
+  + Initialization steps:
+     o Initialize the IO module using the BSP_IO_Init() function. This 
+       function includes the MSP layer hardware resources initialization and the
+       communication layer configuration to start the IO functionalities use.    
+  
+  + IO functionalities use
+     o The IO pin mode is configured when calling the function BSP_IO_ConfigPin(), you 
+       must specify the desired IO mode by choosing the "IO_ModeTypedef" parameter 
+       predefined value.
+     o If an IO pin is used in interrupt mode, the function BSP_IO_ITGetStatus() is 
+       needed to get the interrupt status. To clear the IT pending bits, you should 
+       call the function BSP_IO_ITClear() with specifying the IO pending bit to clear.
+     o The IT is handled using the corresponding external interrupt IRQ handler,
+       the user IT callback treatment is implemented on the same external interrupt
+       callback.
+     o To get/set an IO pin combination state you can use the functions 
+       BSP_IO_ReadPin()/BSP_IO_WritePin() or the function BSP_IO_TogglePin() to toggle the pin 
+       state.
+ 
+------------------------------------------------------------------------------*/
+
+/* Includes ------------------------------------------------------------------*/
+#include "stm32l073z_eval_io.h"
+
+/** @addtogroup BSP
+  * @{
+  */
+
+/** @addtogroup STM32L073Z_EVAL
+  * @{
+  */ 
+  
+/** @defgroup STM32L073Z_EVAL_IO
+  * @{
+  */   
+
+/** @defgroup STM32L073Z_EVAL_IO_Private_Types_Definitions
+  * @{
+  */ 
+/**
+  * @}
+  */ 
+
+/** @defgroup STM32L073Z_EVAL_IO_Private_Defines
+  * @{
+  */ 
+/**
+  * @}
+  */ 
+
+/** @defgroup STM32L073Z_EVAL_IO_Private_Macros
+  * @{
+  */ 
+/**
+  * @}
+  */ 
+
+/** @defgroup STM32L073Z_EVAL_IO_Private_Variables
+  * @{
+  */ 
+static IO_DrvTypeDef *io_driver;
+
+/**
+  * @}
+  */
+
+/** @defgroup STM32L073Z_EVAL_IO_Private_Function_Prototypes
+  * @{
+  */ 
+/**
+  * @}
+  */
+
+/** @defgroup STM32L073Z_EVAL_IO_Private_Functions
+  * @{
+  */ 
+
+/**
+  * @brief  Initializes and configures the IO functionalities and configures all
+  *         necessary hardware resources (GPIOs, clocks..).
+  * @note   BSP_IO_Init() is using HAL_Delay() function to ensure that MFXSTM32L152
+  *         IO Expander is correctly reset. HAL_Delay() function provides accurate
+  *         delay (in milliseconds) based on variable incremented in SysTick ISR. 
+  *         This implies that if BSP_IO_Init() is called from a peripheral ISR process,
+  *         then the SysTick interrupt must have higher priority (numerically lower)
+  *         than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
+  * @param  None
+  * @retval IO_OK if all initializations are OK. Other value if error.
+  */
+uint8_t BSP_IO_Init(void)
+{
+  static uint8_t Is_MFX_Initialized = 0;
+  uint8_t ret = IO_ERROR;
+  uint8_t mfxstm32l152_id = 0;
+  
+  /* Read ID and verify the IO expander is ready */
+  mfxstm32l152_id = mfxstm32l152_io_drv.ReadID(IO_I2C_ADDRESS);
+  if((mfxstm32l152_id == MFXSTM32L152_ID_1) || (mfxstm32l152_id == MFXSTM32L152_ID_2))
+  {
+    /* Initialize the IO driver structure */
+    ret = IO_OK;
+  }
+  
+  if((ret == IO_OK) && (Is_MFX_Initialized == 0))
+  {
+    Is_MFX_Initialized = 1;
+    io_driver = &mfxstm32l152_io_drv;
+    io_driver->Init(IO_I2C_ADDRESS);
+    io_driver->Start(IO_I2C_ADDRESS, IO_PIN_ALL);
+  }
+  return ret;
+}
+
+/**
+  * @brief  Gets the selected pins IT status.
+  * @param  IO_Pin: Selected pins to check the status. 
+  *          This parameter can be any combination of the IO pins.  
+  * @retval IO_OK if read status OK. Other value if error.
+  */
+uint32_t BSP_IO_ITGetStatus(uint32_t IO_Pin)
+{
+  /* Return the IO Pin IT status */
+  return (io_driver->ITStatus(IO_I2C_ADDRESS, IO_Pin));
+}
+
+/**
+  * @brief  Clears all the IO IT pending bits.
+  * @param  None
+  * @retval None
+  */
+void BSP_IO_ITClear(void)
+{
+  /* Clear all IO IT pending bits */
+  io_driver->ClearIT(IO_I2C_ADDRESS, MFXSTM32L152_GPIO_PINS_ALL);
+}
+
+/**
+  * @brief  Configures the IO pin(s) according to IO mode structure value.
+  * @param  IO_Pin: IO pin(s) to be configured. 
+  *          This parameter can be one of the following values:
+  *            @arg  MFXSTM32L152_GPIO_PIN_x: where x can be from 0 to 23.
+  * @param  IO_Mode: IO pin mode to configure
+  *          This parameter can be one of the following values:
+  *            @arg  IO_MODE_INPUT
+  *            @arg  IO_MODE_INPUT
+  *            @arg  IO_MODE_OUTPUT
+  *            @arg  IO_MODE_IT_RISING_EDGE
+  *            @arg  IO_MODE_IT_FALLING_EDGE
+  *            @arg  IO_MODE_IT_LOW_LEVEL
+  *            @arg  IO_MODE_IT_HIGH_LEVEL            
+  *            @arg  IO_MODE_INPUT_PR_PU,
+  *            @arg  IO_MODE_INPUT_PR_PD,
+  *            @arg  IO_MODE_OUTPUT_OD_PU,
+  *            @arg  IO_MODE_OUTPUT_OD_PD,
+  *            @arg  IO_MODE_OUTPUT_PP_PU,
+  *            @arg  IO_MODE_OUTPUT_PP_PD,
+  *            @arg  IO_MODE_IT_RISING_EDGE_PU
+  *            @arg  IO_MODE_IT_FALLING_EDGE_PU
+  *            @arg  IO_MODE_IT_LOW_LEVEL_PU
+  *            @arg  IO_MODE_IT_HIGH_LEVEL_PU
+  *            @arg  IO_MODE_IT_RISING_EDGE_PD
+  *            @arg  IO_MODE_IT_FALLING_EDGE_PD
+  *            @arg  IO_MODE_IT_LOW_LEVEL_PD
+  *            @arg  IO_MODE_IT_HIGH_LEVEL_PD
+  * @retval IO_OK if all initializations are OK. Other value if error.  
+  */
+uint8_t BSP_IO_ConfigPin(uint32_t IO_Pin, IO_ModeTypedef IO_Mode)
+{
+  /* Configure the selected IO pin(s) mode */
+  io_driver->Config(IO_I2C_ADDRESS, IO_Pin, IO_Mode);
+  
+  return IO_OK;  
+}
+
+/**
+  * @brief  Sets the selected pins state.
+  * @param  IO_Pin: Selected pins to write. 
+  *          This parameter can be any combination of the IO pins. 
+  * @param  PinState: New pins state to write  
+  * @retval None
+  */
+void BSP_IO_WritePin(uint32_t IO_Pin, uint8_t PinState)
+{
+  /* Set the Pin state */
+  io_driver->WritePin(IO_I2C_ADDRESS, IO_Pin, PinState);
+}
+
+/**
+  * @brief  Gets the selected pins current state.
+  * @param  IO_Pin: Selected pins to read. 
+  *          This parameter can be any combination of the IO pins. 
+  * @retval The current pins state 
+  */
+uint32_t BSP_IO_ReadPin(uint32_t IO_Pin)
+{
+ return(io_driver->ReadPin(IO_I2C_ADDRESS, IO_Pin));
+}
+
+/**
+  * @brief  Toggles the selected pins state.
+  * @param  IO_Pin: Selected pins to toggle. 
+  *          This parameter can be any combination of the IO pins.  
+  * @retval None
+  */
+void BSP_IO_TogglePin(uint32_t IO_Pin)
+{
+  /* Toggle the current pin state */
+  if(io_driver->ReadPin(IO_I2C_ADDRESS, IO_Pin) == 1) /* Set */
+  {
+    io_driver->WritePin(IO_I2C_ADDRESS, IO_Pin, 0); /* Reset */
+  }
+  else
+  {
+    io_driver->WritePin(IO_I2C_ADDRESS, IO_Pin, 1); /* Set */
+  } 
+}
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
