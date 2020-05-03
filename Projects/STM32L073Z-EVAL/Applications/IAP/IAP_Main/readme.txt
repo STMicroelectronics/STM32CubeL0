@@ -107,7 +107,7 @@ Table 1. IAP implementation on STM32L073Z-EVAL
 |                | ------------------------------------------------------|-------------------------|
 |                | The user application (image to be downloaded with the |                         | 
 |                | IAP) will be programmed starting from address         |                         |
-|                | (uint32_t)0x08004000(1).                              | (Sector 4 - Sector 47)  | 
+|                | (uint32_t)0x08005000(1).                              | (Sector 4 - Sector 47)  | 
 |                | The maximum size of the image to be loaded is:        | (176 Kbytes             | 
 |                | ------------------------------------------------------|-------------------------|
 |                | The image is uploaded with the IAP from the STM32L0xx | 12 Kbytes               | 
@@ -150,7 +150,7 @@ Figure 1. Flash memory usage
                           |                                           |
                           |- - - - - - - - - - - - - - - - - - - - - -|
  It is possible to con-   |          Vector table                     |
- figure the user code     |-------------------------------------------|  0x08004000
+ figure the user code     |-------------------------------------------|  0x08005000
  starting in Bank 2.      |          IAP code                         |
                           |- - - - - - - - - - - - - - - - - - - - - -|
                           |          Vector table                     |
