@@ -7,7 +7,8 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
   * the "License"; You may not use this file except in compliance with the
@@ -35,20 +36,20 @@
 /** @addtogroup Components
   * @{
   */
-
+    
 /** @addtogroup PSENSOR
   * @{
   */
 
 /** @defgroup PSENSOR_Exported_Types
   * @{
-  */
+  */ 
 
 /** @defgroup PSENSOR_Driver_structure  Pressure Sensor Driver structure
   * @{
   */
 typedef struct
-{
+{  
   void       (*Init)(uint16_t);
   uint8_t    (*ReadID)(uint16_t);
   float      (*ReadPressure)(uint16_t);

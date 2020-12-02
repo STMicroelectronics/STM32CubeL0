@@ -2,15 +2,13 @@
   ******************************************************************************
   * @file    stm32_adafruit_lcd.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    04-November-2015
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on the Adafruit 1.8" TFT LCD shield (reference ID 802), 
   *          that is used with the STM32 Nucleo board through SPI interface.     
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -59,6 +57,16 @@
        on LCD using a set of functions.    
  
 ------------------------------------------------------------------------------*/
+
+/* Dependencies
+- st7735.c
+- fonts.h
+- font24.c
+- font20.c
+- font16.c
+- font12.c
+- font8.c"
+EndDependencies */
     
 /* Includes ------------------------------------------------------------------*/
 #include "stm32_adafruit_lcd.h"
@@ -660,15 +668,14 @@ void BSP_LCD_DrawEllipse(int Xpos, int Ypos, int XRadius, int YRadius)
   */
 void BSP_LCD_DrawBitmap(uint16_t Xpos, uint16_t Ypos, uint8_t *pBmp)
 {
-  uint32_t height = 0, width  = 0;
+  uint32_t height = 0;
+  uint32_t width  = 0;
   
   /* Read bitmap width */
-  width = *(uint16_t *) (pBmp + 18);
-  width |= (*(uint16_t *) (pBmp + 20)) << 16;
-  
+  width = pBmp[18] + (pBmp[19] << 8) + (pBmp[20] << 16)  + (pBmp[21] << 24);
+
   /* Read bitmap height */
-  height = *(uint16_t *) (pBmp + 22);
-  height |= (*(uint16_t *) (pBmp + 24)) << 16; 
+  height = pBmp[22] + (pBmp[23] << 8) + (pBmp[24] << 16)  + (pBmp[25] << 24);
   
   /* Remap Ypos, st7735 works with inverted X in case of bitmap */
   /* X = 0, cursor is on Top corner */

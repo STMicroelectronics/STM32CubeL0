@@ -7,7 +7,8 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
   * the "License"; You may not use this file except in compliance with the
@@ -35,23 +36,23 @@
 /** @addtogroup Components
   * @{
   */
-
+    
 /** @addtogroup HSENSOR
   * @{
   */
 
 /** @defgroup HSENSOR_Exported_Types
   * @{
-  */
+  */ 
 
 /** @defgroup HSENSOR_Driver_structure  Humidity Sensor Driver structure
   * @{
   */
 typedef struct
 {
-  void       (*Init)(uint16_t);
+  void       (*Init)(uint16_t); 
   uint8_t    (*ReadID)(uint16_t);
-  float      (*ReadHumidity)(uint16_t);
+  float      (*ReadHumidity)(uint16_t); 
 }HSENSOR_DrvTypeDef;
 /**
   * @}

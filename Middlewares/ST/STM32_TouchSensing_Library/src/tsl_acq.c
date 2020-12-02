@@ -2,25 +2,17 @@
   ******************************************************************************
   * @file    tsl_acq.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    01-february-2016
   * @brief   This file contains all functions to manage the acquisition.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 20020 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
+  * This software component is licensed by ST under Ultimate Liberty license
+  * SLA0044, the "License"; You may not use this file except in compliance with
+  * the License. You may obtain a copy of the License at:
+  *                             www.st.com/SLA0044
   *
   ******************************************************************************
   */
@@ -95,7 +87,7 @@ TSL_Status_enum_T TSL_acq_BankGetResult(TSL_tIndex_T idx_bk, TSL_pFuncMeasFilter
       }
       else
       {
-        if (new_meas > TSL_Params.AcqMax)
+        if (new_meas >= TSL_Params.AcqMax)
         {
           bank->p_chData[idx_dest].Flags.AcqStatus = TSL_ACQ_STATUS_ERROR_MAX;
           bank->p_chData[idx_dest].Delta = 0;
@@ -237,7 +229,7 @@ TSL_Status_enum_T TSL_acq_BankCalibrate(TSL_tIndex_T idx_bk)
         new_meas = TSL_acq_GetMeas(pchSrc->IdxSrc);
 
         // Check min/max and set status flag
-        if ((new_meas < TSL_Params.AcqMin) || (new_meas > TSL_Params.AcqMax))
+        if ((new_meas < TSL_Params.AcqMin) || (new_meas >= TSL_Params.AcqMax))
         {
           // Stop calibration
           // Clear data for all channels of the bank

@@ -2,33 +2,18 @@
   @page UART_TwoBoards_ComDMA UART Two Boards Communication DMA example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************************************************************************
   * @file    UART/UART_TwoBoards_ComDMA/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of the UART Two Boards Communication DMA example.
   ******************************************************************************
   *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
+  * Copyright (c) 2016 STMicroelectronics. All rights reserved.
   *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                       opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   @endverbatim
@@ -62,7 +47,7 @@ Two identical boards are connected as shown on the picture above.
 Board 1: transmitting then receiving board
 Board 2: receiving then transmitting board
 
-The user put a jumper between PA.12 (Arduino D2) and GND on board 1 to initiate the transmission.
+The user puts a jumper between PA.12 (Arduino D2) and GND on board 1 to initiate the transmission.
 Then, board 1 sends in DMA mode a message to board 2 that sends it back to 
 board 1 in DMA mode as well.
 Finally, board 1 and 2 compare the received message to that sent.
@@ -109,9 +94,10 @@ position of the transmitted data.
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
-      
-@note The example needs to ensure that the SysTick time base is always set to 1 millisecond
+
+@note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
 
 @par Directory contents 
 
@@ -124,24 +110,24 @@ position of the transmitted data.
   - UART/UART_TwoBoards_ComDMA/Src/system_stm32l0xx.c      STM32L0xx system source file
 
 
-@par Hardware and Software environment 
+@par Hardware and Software environment
 
-  - This example runs on STM32L031xx devices.    
+  - This example runs on STM32L031xx devices.
   - This example has been tested with two STM32L031K6-Nucleo boards embedding
-    a STM32L031K6 device and can be easily tailored to any other supported device 
+    a STM32L031K6 device and can be easily tailored to any other supported device
     and development board.
 
   - STM32L031K6-Nucleo set-up
     - Connect a wire between 1st board PA.02 (A7 : pin 5 on CN4) pin (Uart Tx) and 2nd board PA.03 (A2 : pin 10 on CN4) pin (Uart Rx)
     - Connect a wire between 1st board PA.03 (A2 : pin 10 on CN4) pin (Uart Rx) and 2nd board PA.02 (A7 : pin 5 on CN4) pin (Uart Tx)
-    - Connect 1st board GND to 2nd Board GND    
+    - Connect 1st board GND to 2nd Board GND
 
 @par How to use it ? 
 
 In order to make the program work, you must do the following :
-- Open your preferred toolchain 
+ - Open your preferred toolchain
  - Rebuild all files and load your image into target memory
-- Run the example
+ - Run the example
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

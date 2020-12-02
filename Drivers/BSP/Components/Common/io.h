@@ -6,7 +6,8 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
   * the "License"; You may not use this file except in compliance with the
@@ -14,7 +15,7 @@
   *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __IO_H
@@ -34,7 +35,7 @@
 /** @addtogroup Components
   * @{
   */
-
+    
 /** @addtogroup IO
   * @{
   */
@@ -86,21 +87,21 @@ typedef enum
   * @{
   */
 typedef struct
-{
+{  
   void       (*Init)(uint16_t);
   uint16_t   (*ReadID)(uint16_t);
   void       (*Reset)(uint16_t);
-
+  
   void       (*Start)(uint16_t, uint32_t);
   uint8_t    (*Config)(uint16_t, uint32_t, IO_ModeTypedef);
   void       (*WritePin)(uint16_t, uint32_t, uint8_t);
   uint32_t   (*ReadPin)(uint16_t, uint32_t);
-
+  
   void       (*EnableIT)(uint16_t);
   void       (*DisableIT)(uint16_t);
   uint32_t    (*ITStatus)(uint16_t, uint32_t);
   void       (*ClearIT)(uint16_t, uint32_t);
-
+    
 }IO_DrvTypeDef;
 /**
   * @}

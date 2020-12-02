@@ -3,11 +3,12 @@
   * @file    audio.h
   * @author  MCD Application Team
   * @brief   This header file contains the common defines and functions prototypes
-  *          for the Audio driver.
+  *          for the Audio driver.  
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
   * the "License"; You may not use this file except in compliance with the
@@ -35,7 +36,7 @@
 /** @addtogroup Components
   * @{
   */
-
+    
 /** @addtogroup AUDIO
   * @{
   */

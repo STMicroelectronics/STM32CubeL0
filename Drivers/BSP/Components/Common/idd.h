@@ -6,7 +6,8 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
   * the "License"; You may not use this file except in compliance with the
@@ -14,7 +15,7 @@
   *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
-  */
+  */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __IDD_H
@@ -34,7 +35,7 @@
 /** @addtogroup Components
   * @{
   */
-
+    
 /** @addtogroup IDD
   * @{
   */
@@ -80,11 +81,11 @@ typedef struct
                                  This parameter can be a value of @ref IDD_Vref_Measurement */
   uint8_t Calibration;      /*!< Specifies if calibration is done before each Idd measurement
                                   */
-  uint8_t PreDelayUnit;     /*!< Specifies Pre delay unit
+  uint8_t PreDelayUnit;     /*!< Specifies Pre delay unit 
                                  This parameter can be a value of @ref IDD_PreDelay */
   uint8_t PreDelayValue;    /*!< Specifies Pre delay value in selected unit
                                   */
-  uint8_t MeasureNb;        /*!< Specifies number of Measure to be performed
+  uint8_t MeasureNb;        /*!< Specifies number of Measure to be performed 
                                  This parameter can be a value between 1 and 256 */
   uint8_t DeltaDelayUnit;   /*!< Specifies Delta delay unit
                                   This parameter can be a value of @ref IDD_DeltaDelay */

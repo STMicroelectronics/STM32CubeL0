@@ -1,37 +1,21 @@
 /**
   ******************************************************************************
-  * @file    UART/UART_TwoBoards_ComDMA/Src/main.c 
+  * @file    UART/UART_TwoBoards_ComDMA/Src/main.c
   * @author  MCD Application Team
   * @brief   This sample code shows how to use UART HAL API to transmit
   *          and receive a data buffer with a communication process based on
-  *          DMA transfer. 
+  *          DMA transfer.
   *          The communication is done using 2 Boards.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics. 
+  * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the 
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */
@@ -98,33 +82,7 @@ int main(void)
   /* Configure LED3 */
   BSP_LED_Init(LED3);
 
-  /*##-1- Configure the UART peripheral ######################################*/
-  /* Put the USART peripheral in the Asynchronous mode (UART Mode) */
-  /* UART configured as follows:
-      - Word Length = 8 Bits
-      - Stop Bit = One Stop bit
-      - Parity = None
-      - BaudRate = 9600 baud
-      - Hardware flow control disabled (RTS and CTS signals) */
-  UartHandle.Instance        = USARTx;
-
-  UartHandle.Init.BaudRate   = 9600;
-  UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
-  UartHandle.Init.StopBits   = UART_STOPBITS_1;
-  UartHandle.Init.Parity     = UART_PARITY_NONE;
-  UartHandle.Init.HwFlowCtl  = UART_HWCONTROL_NONE;
-  UartHandle.Init.Mode       = UART_MODE_TX_RX;
-  if(HAL_UART_DeInit(&UartHandle) != HAL_OK)
-  {
-    Error_Handler();
-  }  
-  if(HAL_UART_Init(&UartHandle) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  
 #ifdef TRANSMITTER_BOARD
-
   /* Configure PA.12 (Arduino D2) as input with External interrupt */
   GPIO_InitStruct.Pin = GPIO_PIN_12;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
@@ -138,6 +96,7 @@ int main(void)
   /* Enable and set PA.12 (Arduino D2) EXTI Interrupt to the lowest priority */
   NVIC_SetPriority((IRQn_Type)(EXTI4_15_IRQn), 0x03);
   HAL_NVIC_EnableIRQ((IRQn_Type)(EXTI4_15_IRQn));
+
   /* Wait for the user to set GPIOA to GND before starting the Communication.
      In the meantime, LED3 is blinking */
   while(VirtualUserButtonStatus == 0)
@@ -148,28 +107,26 @@ int main(void)
   }
 
   BSP_LED_Off(LED3);
+#endif
 
-  
-  /* The board sends the message and expects to receive it back */
-  
-  /*##-2- Start the transmission process #####################################*/  
-  /* While the UART in reception process, user can transmit data through 
-     "aTxBuffer" buffer */
-  if(HAL_UART_Transmit_DMA(&UartHandle, (uint8_t*)aTxBuffer, TXBUFFERSIZE)!= HAL_OK)
-  {
-    Error_Handler();
-  }
-  
-  /*##-3- Wait for the end of the transfer ###################################*/  
-  while (UartReady != SET)
-  {
-  }
+  /*##-1- Configure the UART peripheral ######################################*/
+  /* Put the USART peripheral in the Asynchronous mode (UART Mode) */
+  /* UART configured as follows:
+      - Word Length = 8 Bits
+      - Stop Bit = One Stop bit
+      - Parity = None
+      - BaudRate = 9600 baud
+      - Hardware flow control disabled (RTS and CTS signals) */
+  UartHandle.Instance            = USARTx;
 
-  
-  /* Reset transmission flag */
-  UartReady = RESET;
-  
-  /*##-4- Put UART peripheral in reception process ###########################*/ 
+  UartHandle.Init.BaudRate       = 9600;
+  UartHandle.Init.WordLength     = UART_WORDLENGTH_8B;
+  UartHandle.Init.StopBits       = UART_STOPBITS_1;
+  UartHandle.Init.Parity         = UART_PARITY_NONE;
+  UartHandle.Init.HwFlowCtl      = UART_HWCONTROL_NONE;
+  UartHandle.Init.Mode           = UART_MODE_TX_RX;
+  UartHandle.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+
   if(HAL_UART_DeInit(&UartHandle) != HAL_OK)
   {
     Error_Handler();
@@ -177,17 +134,41 @@ int main(void)
   if(HAL_UART_Init(&UartHandle) != HAL_OK)
   {
     Error_Handler();
-  }   
+  }
+  
+#ifdef TRANSMITTER_BOARD
+  
+  /* The board sends the message and expects to receive it back */
+  /* DMA is programmed for reception before starting the transmission, in order to
+     be sure DMA Rx is ready when board 2 will start transmitting */
+
+  /*##-2- Program the Reception process #####################################*/  
   if(HAL_UART_Receive_DMA(&UartHandle, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
   {
     Error_Handler();
   }
 
+  /*##-3- Start the transmission process #####################################*/
+  /* While the UART in reception process, user can transmit data through 
+     "aTxBuffer" buffer */
+  if(HAL_UART_Transmit_DMA(&UartHandle, (uint8_t*)aTxBuffer, TXBUFFERSIZE)!= HAL_OK)
+  {
+    Error_Handler();
+  }
+  
+  /*##-4- Wait for the end of the transfer ###################################*/
+  while (UartReady != SET)
+  {
+  }
+
+  /* Reset transmission flag */
+  UartReady = RESET;
+  
 #else
   
   /* The board receives the message and sends it back */
 
-  /*##-2- Put UART peripheral in reception process ###########################*/  
+  /*##-2- Put UART peripheral in reception process ###########################*/
   if(HAL_UART_Receive_DMA(&UartHandle, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
   {
     Error_Handler();
@@ -195,7 +176,7 @@ int main(void)
 
   /*##-3- Wait for the end of the transfer ###################################*/
   /* While waiting for message to come from the other board, LED3 is
-     blinking according to the following pattern: a double flash every half-second */  
+     blinking according to the following pattern: a double flash every half-second */
   while (UartReady != SET)
   {
       BSP_LED_On(LED3); 
@@ -212,17 +193,9 @@ int main(void)
   UartReady = RESET;
   BSP_LED_Off(LED3); 
   
-  /*##-4- Start the transmission process #####################################*/  
+  /*##-4- Start the transmission process #####################################*/
   /* While the UART in reception process, user can transmit data through 
      "aTxBuffer" buffer */
-  if(HAL_UART_DeInit(&UartHandle) != HAL_OK)
-  {
-    Error_Handler();
-  }  
-  if(HAL_UART_Init(&UartHandle) != HAL_OK)
-  {
-    Error_Handler();
-  }     
   if(HAL_UART_Transmit_DMA(&UartHandle, (uint8_t*)aTxBuffer, TXBUFFERSIZE)!= HAL_OK)
   {
     Error_Handler();
@@ -230,7 +203,7 @@ int main(void)
   
 #endif /* TRANSMITTER_BOARD */
   
-  /*##-5- Wait for the end of the transfer ###################################*/  
+  /*##-5- Wait for the end of the transfer ###################################*/
   while (UartReady != SET)
   {
   }
@@ -243,9 +216,10 @@ int main(void)
   {
     Error_Handler();
   }
-   
+
   /* Turn on LED3 if test passes then enter infinite loop */
-  BSP_LED_On(LED3); 
+  BSP_LED_On(LED3);
+
   /* Infinite loop */
   while (1)
   {
@@ -302,8 +276,10 @@ void SystemClock_Config(void)
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
   
+  /* Disable Power Control clock */
+  __HAL_RCC_PWR_CLK_DISABLE();
+  
 }
-
 
 /**
   * @brief  Tx Transfer completed callback
@@ -314,10 +290,9 @@ void SystemClock_Config(void)
   */
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
-  /* Set transmission flag: trasfer complete*/
+  /* Set transmission flag: transfer complete */
   UartReady = SET;
 
-  
 }
 
 /**
@@ -329,10 +304,9 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
   */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
-  /* Set transmission flag: trasfer complete*/
+  /* Set transmission flag: transfer complete */
   UartReady = SET;
 
-  
 }
 
 /**
@@ -344,7 +318,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
   */
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *UartHandle)
 {
-    Error_Handler();
+  Error_Handler();
 }
 
 
@@ -390,18 +364,15 @@ static uint16_t Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferL
   */
 static void Error_Handler(void)
 {
-  /* Turn LED3 on */
-  BSP_LED_On(LED3);
   while(1)
   {
-    /* Error if LED3 is slowly blinking (1 sec. period) */
-    BSP_LED_Toggle(LED3); 
-    HAL_Delay(1000); 
-  }  
+    /* Toggle LED3 for error */
+    BSP_LED_Toggle(LED3);
+    HAL_Delay(500);
+  }
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -409,8 +380,8 @@ static void Error_Handler(void)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t *file, uint32_t line)
-{ 
+void assert_failed(char *file, uint32_t line)
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

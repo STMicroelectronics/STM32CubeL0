@@ -2,12 +2,13 @@
   ******************************************************************************
   * @file    dpredriver.h
   * @author  MCD Application Team
-  * @brief   This header file contains the functions prototypes for the
+  * @brief   This header file contains the functions prototypes for the  
   *          DisplayPort Linear Redriver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
   * the "License"; You may not use this file except in compliance with the
@@ -35,14 +36,14 @@
 /** @addtogroup Components
   * @{
   */
-
+    
 /** @addtogroup DPREDRIVER
   * @{
   */
 
 /** @defgroup DPREDRIVER_Exported_Types
   * @{
-  */
+  */ 
 
 /** @defgroup DPREDRIVER_Channel_Identifier  Channel Identifier
   * @{
@@ -59,14 +60,14 @@
 /**
   * @}
   */
-
+  
  /** @defgroup DPREDRIVER_Driver_structure  DisplayPort Linear Redriver Driver structure
   * @{
   */
 typedef struct
 {
   uint32_t  (*Init)(uint16_t);
-  void      (*DeInit)(uint16_t);
+  void      (*DeInit)(uint16_t); 
   uint32_t  (*PowerOn)(uint16_t);
   uint32_t  (*PowerOff)(uint16_t);
   uint32_t  (*SetEQGain)(uint16_t, DPREDRIVER_ChannelId_t, uint8_t);

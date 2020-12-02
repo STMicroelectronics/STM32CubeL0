@@ -11,6 +11,11 @@
 
 
 
+
+
+
+
+
   
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
@@ -99,7 +104,7 @@ div.Section1
             <h1 style="margin-bottom: 18pt; text-align: center;" align="center"><span style="font-size: 20pt; font-family: Verdana; color: rgb(51, 102, 255);">Release
 Notes for Adafruit_Shield&nbsp;&nbsp;Drivers</span><span style="font-size: 20pt; font-family: Verdana;"><o:p></o:p></span></h1>
             <p class="MsoNormal" style="text-align: center;" align="center"><span style="font-size: 10pt; font-family: Arial; color: black;">Copyright
-2015 STMicroelectronics</span><span style="color: black;"><u1:p></u1:p><o:p></o:p></span></p>
+2016 STMicroelectronics</span><span style="color: black;"><u1:p></u1:p><o:p></o:p></span></p>
             <p class="MsoNormal" style="text-align: center;" align="center"><span style="font-size: 10pt; font-family: Arial; color: black;"><img alt="" id="_x0000_i1025" src="../../../_htmresc/st_logo.png" style="border: 0px solid ; width: 86px; height: 65px;"></span><span style="font-size: 10pt;"><o:p></o:p></span></p>
             </td>
           </tr>
@@ -109,21 +114,433 @@ Notes for Adafruit_Shield&nbsp;&nbsp;Drivers</span><span style="font-size: 20pt;
       <table class="MsoNormalTable" style="width: 675pt;" border="0" cellpadding="0" width="900">
         <tbody>
           <tr style="">
-            <td style="padding: 0cm;" valign="top">
-            <span style="font-family: &quot;Times New Roman&quot;;">
-            </span>
-            <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;"><a name="History"></a><span style="font-size: 12pt; color: white;">Update History</span></h2>
-            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V2.0.1 / 04-November-2015</span></h3><p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
-Changes<o:p></o:p></span></u></b></p>
+            <td style="padding: 0cm;" valign="top"><span style="font-family: &quot;Times New Roman&quot;;"></span><p class="MsoListParagraph" style="text-align: left;"><span style="font-size: 11pt; font-family: &quot;Arial&quot;,sans-serif;">The BSP (Board Specific
+Package) drivers are parts of the STM32Cube package based on the HAL
+drivers and provide a set of high level APIs relative to the hardware
+components and features in the evaluation boards, discovery kits and nucleo
+boards coming with the STM32Cube package for a given STM32 serie.</span></p>
+            <p class="MsoListParagraph" style="text-align: left;"><span style="font-size: 11pt; font-family: &quot;Arial&quot;,sans-serif;">The BSP drivers allow a quick access to the boards&#8217;
+services using high level APIs and without any specific configuration as the
+link with the HAL and the external components is done in intrinsic within the drivers. <br>
+            </span></p>
+            <p class="MsoListParagraph" style="text-align: left;"><span style="font-size: 11pt; font-family: &quot;Arial&quot;,sans-serif;">From project settings points of view, user has only
+to add the necessary driver&#8217;s files in the workspace and call the needed
+functions from examples. However some low level
+configuration functions are weak and can be overridden by the applications if user
+wants to change some BSP drivers default behavior.</span></p>
+
+
+            <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;"><span style="font-size: 12pt; color: white;">&nbsp;&nbsp;&nbsp; Update History</span></h2><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 207px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V3.0.3 / 30-April-2018 <o:p></o:p></span></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             
-            <ul style="margin-top: 0cm;" type="square"><li><span style="font-size: 10pt; font-family: Verdana;">Fix GNU GCC warning on missing break instruction in <span style="font-style: italic;">SD_GetDataResponse()</span></span></li></ul><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V2.0.0 / 10-September-2015</span></h3><p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
 Changes<o:p></o:p></span></u></b></p>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
             
-            <ul style="margin-top: 0cm;" type="square"><li><span style="font-size: 10pt; font-family: Verdana;">Improve SD over SPI protocol implementation<span style="font-style: italic;"></span></span></li><li><span style="font-size: 10pt; font-family: Verdana;"><span style="font-style: italic;"></span></span><span style="font-size: 10pt; font-family: Verdana;"><span style="font-style: italic;">Note:</span> This new implementation requires to increase Heap_Size by 0x200&nbsp;</span></li><li><span style="font-size: 10pt; font-family: Verdana;"></span><span style="font-size: 10pt; font-family: Verdana;"><span style="font-style: italic;">Note:</span> This driver version needs BSP Nucleo&nbsp;driver V2.0.0 and later</span></li></ul><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.1.0 / 22-July-2014</span></h3>
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span><span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+            
+            
+            <ul style="list-style-type: square;"><li><span style="font-family: Verdana; font-size: 10pt;">stm32_adafruit_sd.c:<span style="font-style: italic; font-weight: bold; text-decoration: underline;"></span></span></li><ul><li><span style="font-family: Verdana; font-size: 10pt;">Fix BSP_SD_ReadBlocks and BSP_SD_WriteBlocks to support SDHC cards</span><span style="font-size: 10pt; font-family: Verdana;"></span></li></ul></ul><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 207px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V3.0.2 /&nbsp;24-August-2017 <o:p></o:p></span></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+Changes<o:p></o:p></span></u></b></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span><span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+            
+            
+            <ul style="list-style-type: square;"><li><span style="font-family: Verdana; font-size: 10pt;">stm32_adafruit_lcd.c:<span style="font-style: italic; font-weight: bold; text-decoration: underline;"></span></span></li><ul><li><span style="font-size: 10pt; font-family: Verdana;">Fix compilation errors with SW4STM32 toolchain</span></li></ul></ul><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V3.0.1 / 02-June-2017 <o:p></o:p></span></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+Changes<o:p></o:p></span></u></b></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span><span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+            
+            
+            <ul style="list-style-type: square;"><li><span style="font-size: 10pt; font-family: Verdana;">Add general description of BSP drivers<br>
+</span></li><li><span style="font-size: 10pt; font-family: Verdana;">Add Dependencies section<br>
+</span></li><li><span style="font-size: 10pt; font-family: Verdana;">Support of PDSC</span></li></ul><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 212px;"><span style="color: white; font-family: Arial; font-size: 10pt;">V3.0.0 / 23-December-2016</span></h3>
+
+            
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b><u><span style="color: black; font-family: Verdana; font-size: 10pt;">Main Changes<o:p></o:p></span></u></b></p>
+
+            
+            <ul style="margin-top: 0cm;" type="square">
+              <li><span style="font-family: Verdana; font-size: 10pt;">Update BSP_SD_ReadBlocks and BSP_SD_WriteBlocks following new HAL SD drivers implementation<span style="font-style: italic;"></span></span></li>
+              <li><span style="font-family: Verdana; font-size: 10pt;">Update BSP_SD_Erase implementation to manage SDHC and SDSC cards</span></li>
+              <li><span style="font-family: Verdana; font-size: 10pt;">Fix block size to 512 bytes for all card types<span style="font-style: italic; font-weight: bold; text-decoration: underline;"></span></span><br>
+                <span style="font-family: Verdana; font-size: 10pt;"><span style="font-style: italic; font-weight: bold; text-decoration: underline;">Notes:</span>&nbsp;</span><span style="font-family: Verdana; font-size: 10pt;"></span></li>
+              <ul>
+                <li><span style="font-family: Verdana; font-size: 10pt;">These </span><span style="font-family: Verdana; font-size: 10pt;">Adafruit BSP drivers</span><span style="font-family: Verdana; font-size: 10pt;"> break the compatibility with previous versions.</span></li>
+                <li><span style="font-family: Verdana; font-size: 10pt;"></span><span style="font-family: Verdana; font-size: 10pt;">If FatFs is required, </span><span style="font-family: Verdana; font-size: 10pt; font-style: italic;">"FatFS R0.11<span class="Apple-converted-space"> </span> </span><span style="font-family: Verdana; font-size: 10pt;"><span style="font-style: italic;">ST modified 20161223"</span><span style="color: red;"><span style="color: black;"></span></span></span><span style="font-family: Verdana; font-size: 10pt;"> </span><span style="font-family: Verdana; font-size: 10pt;">must be used with </span><span style="font-family: Verdana; font-size: 10pt;">this version of Adafruit BSP drivers.</span></li>
+              </ul>
+
+            </ul>
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 211px;"><span style="color: white; font-family: Arial; font-size: 10pt;">V2.0.1 / 04-November-2015</span></h3>
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b><u><span style="color: black; font-family: Verdana; font-size: 10pt;">Main Changes<o:p></o:p></span></u></b></p>
+            <ul style="margin-top: 0cm;" type="square">
+<li><span style="font-family: Verdana; font-size: 10pt;">Fix GNU GCC warning on missing break instruction in <span style="font-style: italic;">SD_GetDataResponse()</span></span></li>
+            </ul>
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 221px;"><span style="color: white; font-family: Arial; font-size: 10pt;">V2.0.0 / 10-September-2015</span></h3>
+
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b><u><span style="color: black; font-family: Verdana; font-size: 10pt;">Main Changes<o:p></o:p></span></u></b></p>
+            <ul style="margin-top: 0cm;" type="square">
+<li><span style="font-family: Verdana; font-size: 10pt;">Improve SD over SPI protocol implementation<span style="font-style: italic;"></span></span></li><li><span style="font-family: Verdana; font-size: 10pt;"><span style="font-style: italic;"></span></span><span style="font-family: Verdana; font-size: 10pt;"><span style="font-style: italic;">Note:</span> This new implementation requires to increase Heap_Size by 0x200&nbsp;</span></li><li><span style="font-family: Verdana; font-size: 10pt;"></span><span style="font-family: Verdana; font-size: 10pt;"><span style="font-style: italic;">Note:</span> This driver version needs BSP Nucleo&nbsp;driver V2.0.0 and later</span></li>
+            </ul>
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 212px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.1.1 / 21-November-2014 <o:p></o:p></span></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            
+            
+            
+            
+            
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+Changes<o:p></o:p></span></u></b></p>
+
+
+
+
+
+
+
+
+
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span><span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+            
+            
+
+
+
+            
+            
+            <ul style="list-style-type: square;">
+              <li><span style="font-size: 10pt; font-family: Verdana;">stm32_adafruit_sd.c<br>
+                </span></li>
+              <ul>
+                <li><span style="font-size: 10pt; font-family: Verdana;">Add workaround for the issue seen on some STM32 Nucleo boards; reading the SD card status will return an error</span></li>
+                <li><span style="font-size: 10pt; font-family: Verdana;">A fix will be implemented in next release<br>
+                  </span></li>
+              </ul>
+              <li><span style="font-size: 10pt; font-family: Verdana;">stm32_adafruit_lcd.h: change "\" by "/" in the include path to fix compilation issue under Linux</span><br>
+                <span style="font-size: 10pt; font-family: Verdana;"></span></li>
+<li><span style="font-size: 10pt; font-family: Verdana;">Miscellaneous comments update</span></li>
+            </ul>
+
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.1.0 / 22-July-2014</span></h3>
             <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
 Changes<o:p></o:p></span></u></b></p>
 

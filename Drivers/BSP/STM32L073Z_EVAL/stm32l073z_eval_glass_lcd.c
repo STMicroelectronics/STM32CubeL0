@@ -120,7 +120,7 @@ const uint32_t LetterMap[26] =
     /*   M          N           O            P          Q         R      */ 
     0x00005514, 0x00004515, 0x00202514, 0x00002526, 0x00002532, 0x00002527,
     /*   S           T           U           V           W           X   */
-    0x00202432, 0x00022200, 0x00200514, 0x00041404, 0x00050515, 0x00045001, 
+    0x00202432, 0x00022200, 0x00200514, 0x00041404, 0x00040515, 0x00045001, 
     /*  Y          Z     */
     0x00025000, 0x00243000
   };
@@ -704,25 +704,25 @@ void BSP_LCD_GLASS_ArrowConfig(ArrowDirection_TypeDef ArrowDirection)
     /* ARROWDIRECTION_UP */
     case ARROWDIRECTION_UP:
       /* Set ARROWDIRECTION_UP on  */
-      HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER0, 0xFFFF6FFF, 0x00001000);
+      HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER0, 0xFFFFEFFF, 0x00001000);
       break;
 
     /* ARROWDIRECTION_LEFT */
     case ARROWDIRECTION_LEFT :
       /* Set ARROWDIRECTION_LEFT on  */
-      HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER2, 0xFFFF6FFF, 0x00001000);
+      HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER2, 0xFFFFEFFF, 0x00001000);
       break;
 
     /* ARROWDIRECTION_DOWN */
     case ARROWDIRECTION_DOWN:
       /* Set ARROWDIRECTION_DOWN on  */
-      HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER2, 0xFFFF6FFF, 0x00008000);
+      HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER2, 0xFFFF7FFF, 0x00008000);
       break;
 
     /* ARROWDIRECTION_RIGHT */
     case ARROWDIRECTION_RIGHT:
       /* Set ARROWDIRECTION_RIGHT on  */
-      HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER0, 0xFFFF6FFF, 0x00008000);
+      HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER0, 0xFFFF7FFF, 0x00008000);
       break;
 
     case ARROWDIRECTION_OFF:
@@ -854,7 +854,7 @@ void BSP_LCD_GLASS_ValueUnitConfig(ValueUnit_TypeDef ValueUnit)
     /* VALUEUNIT MILLIAMPERE*/
     case VALUEUNIT_MILLIAMPERE:
       /* Set VALUEUNIT_MILLIAMPERE on  */
-      HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER2, 0xFFFBFFBF, 0x00040000);
+      HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER2, 0xFFFBFFFF, 0x00040000);
       break;
 
     /* VALUEUNIT MICROAMPERE)*/
@@ -866,7 +866,7 @@ void BSP_LCD_GLASS_ValueUnitConfig(ValueUnit_TypeDef ValueUnit)
     /* VALUEUNIT NANOAMPERE*/
     case  VALUEUNIT_NANOAMPERE:
       /* Set VALUEUNIT_NANOAMPERE on  */
-      HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER2, 0xFFFBFFBF, 0x00000040);
+      HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER2, 0xFFFFFFBF, 0x00000040);
       break;
 
     case  VALUEUNIT_OFF:
@@ -2735,7 +2735,7 @@ void BSP_LCD_GLASS_ClearMatrixPixel(PixelRow_TypeDef PixelRow, PixelColumn_TypeD
         
         case PIXELCOLUMN_4:
           /* Position : Row = 8 , Column =4 */
-          HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER12, (uint32_t)0xFEFFFFF0, 0);
+          HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER12, (uint32_t)0xFEFFFFFF, 0);
           break;
         
         case PIXELCOLUMN_5:
@@ -2745,7 +2745,7 @@ void BSP_LCD_GLASS_ClearMatrixPixel(PixelRow_TypeDef PixelRow, PixelColumn_TypeD
         
         case PIXELCOLUMN_6:
           /* Position : Row = 8 , Column =6 */
-          HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER12, (uint32_t)0xFBFFFFF0, 0);
+          HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER12, (uint32_t)0xFBFFFFFF, 0);
           break;
         
         case PIXELCOLUMN_7:
@@ -2868,7 +2868,7 @@ void BSP_LCD_GLASS_ClearMatrixPixel(PixelRow_TypeDef PixelRow, PixelColumn_TypeD
         
         case PIXELCOLUMN_10:
           /* Position : Row = 9 , Column =10*/
-          HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER10, (uint32_t)0xBFFFFFF, 0);
+          HAL_LCD_Write(&LCDHandle, LCD_RAM_REGISTER10, (uint32_t)0xBFFFFFFF, 0);
           break;
         
         case PIXELCOLUMN_11:

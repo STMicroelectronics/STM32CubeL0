@@ -1,37 +1,21 @@
 /**
   ******************************************************************************
-  * @file    UART/UART_TwoBoards_ComDMA/Src/main.c 
+  * @file    UART/UART_TwoBoards_ComDMA/Src/main.c
   * @author  MCD Application Team
-  * @brief   This sample code shows how to use STM32L0xx UART HAL API to transmit 
+  * @brief   This sample code shows how to use UART HAL API to transmit
   *          and receive a data buffer with a communication process based on
-  *          DMA transfer. 
+  *          DMA transfer.
   *          The communication is done using 2 Boards.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics. 
+  * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the 
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
   *
   ******************************************************************************
   */
@@ -64,14 +48,14 @@ uint8_t aTxBuffer[] = " ****UART_TwoBoards communication based on DMA****  ****U
 uint8_t aRxBuffer[RXBUFFERSIZE];
 
 /* Private function prototypes -----------------------------------------------*/
-static void SystemClock_Config(void);
+void SystemClock_Config(void);
 static void Error_Handler(void);
 static uint16_t Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
 
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Main program.
+  * @brief  Main program
   * @param  None
   * @retval None
   */
@@ -92,25 +76,31 @@ int main(void)
   /* Configure LED2 */
   BSP_LED_Init(LED2);
 
-  /* Configure the system clock to 32 Mhz */
+  /* Configure the system clock to 32 MHz */
   SystemClock_Config();
 
   /*##-1- Configure the UART peripheral ######################################*/
   /* Put the USART peripheral in the Asynchronous mode (UART Mode) */
-  /* UART1 configured as follow:
+  /* UART configured as follows:
       - Word Length = 8 Bits
       - Stop Bit = One Stop bit
       - Parity = None
       - BaudRate = 9600 baud
       - Hardware flow control disabled (RTS and CTS signals) */
-  UartHandle.Instance        = USARTx;
-  UartHandle.Init.BaudRate   = 9600;
-  UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
-  UartHandle.Init.StopBits   = UART_STOPBITS_1;
-  UartHandle.Init.Parity     = UART_PARITY_NONE;
-  UartHandle.Init.HwFlowCtl  = UART_HWCONTROL_NONE;
-  UartHandle.Init.Mode       = UART_MODE_TX_RX;
-  
+  UartHandle.Instance            = USARTx;
+
+  UartHandle.Init.BaudRate       = 9600;
+  UartHandle.Init.WordLength     = UART_WORDLENGTH_8B;
+  UartHandle.Init.StopBits       = UART_STOPBITS_1;
+  UartHandle.Init.Parity         = UART_PARITY_NONE;
+  UartHandle.Init.HwFlowCtl      = UART_HWCONTROL_NONE;
+  UartHandle.Init.Mode           = UART_MODE_TX_RX;
+  UartHandle.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+
+  if(HAL_UART_DeInit(&UartHandle) != HAL_OK)
+  {
+    Error_Handler();
+  }  
   if(HAL_UART_Init(&UartHandle) != HAL_OK)
   {
     Error_Handler();
@@ -137,8 +127,16 @@ int main(void)
   BSP_LED_Off(LED2);
 
   /* The board sends the message and expects to receive it back */
-  
-  /*##-2- Start the transmission process #####################################*/  
+  /* DMA is programmed for reception before starting the transmission, in order to
+     be sure DMA Rx is ready when board 2 will start transmitting */
+
+  /*##-2- Program the Reception process #####################################*/  
+  if(HAL_UART_Receive_DMA(&UartHandle, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /*##-3- Start the transmission process #####################################*/
   /* While the UART in reception process, user can transmit data through 
      "aTxBuffer" buffer */
   if(HAL_UART_Transmit_DMA(&UartHandle, (uint8_t*)aTxBuffer, TXBUFFERSIZE)!= HAL_OK)
@@ -146,40 +144,25 @@ int main(void)
     Error_Handler();
   }
   
-  /*##-3- Wait for the end of the transfer ###################################*/  
+  /*##-4- Wait for the end of the transfer ###################################*/
   while (UartReady != SET)
   {
   }
-  
+
   /* Reset transmission flag */
   UartReady = RESET;
   
-  /*##-4- Put UART peripheral in reception process ###########################*/
-  if(HAL_UART_DeInit(&UartHandle) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if(HAL_UART_Init(&UartHandle) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-   if(HAL_UART_Receive_DMA(&UartHandle, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
 #else
   
   /* The board receives the message and sends it back */
 
-  /*##-2- Put UART peripheral in reception process ###########################*/  
+  /*##-2- Put UART peripheral in reception process ###########################*/
   if(HAL_UART_Receive_DMA(&UartHandle, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
   {
     Error_Handler();
   }
-  
-  /*##-3- Wait for the end of the transfer ###################################*/  
+
+  /*##-3- Wait for the end of the transfer ###################################*/
   while (UartReady != SET)
   {
   }
@@ -187,17 +170,9 @@ int main(void)
   /* Reset transmission flag */
   UartReady = RESET;
   
-  /*##-4- Start the transmission process #####################################*/  
+  /*##-4- Start the transmission process #####################################*/
   /* While the UART in reception process, user can transmit data through 
      "aTxBuffer" buffer */
-  if(HAL_UART_DeInit(&UartHandle) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if(HAL_UART_Init(&UartHandle) != HAL_OK)
-  {
-    Error_Handler();
-  }
   if(HAL_UART_Transmit_DMA(&UartHandle, (uint8_t*)aTxBuffer, TXBUFFERSIZE)!= HAL_OK)
   {
     Error_Handler();
@@ -205,7 +180,7 @@ int main(void)
 
 #endif /* TRANSMITTER_BOARD */
   
-  /*##-5- Wait for the end of the transfer ###################################*/  
+  /*##-5- Wait for the end of the transfer ###################################*/
   while (UartReady != SET)
   {
   }
@@ -218,10 +193,10 @@ int main(void)
   {
     Error_Handler();
   }
-  
+
   /* Turn LED2 on: Transfer process is correct */
-  BSP_LED_On(LED2);   
-  
+  BSP_LED_On(LED2);
+
   /* Infinite loop */
   while (1)
   {
@@ -278,6 +253,9 @@ void SystemClock_Config(void)
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
   
+  /* Disable Power Control clock */
+  __HAL_RCC_PWR_CLK_DISABLE();
+  
 }
 
 /**
@@ -289,8 +267,9 @@ void SystemClock_Config(void)
   */
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
-  /* Set transmission flag: trasfer complete*/
+  /* Set transmission flag: transfer complete */
   UartReady = SET;
+
 }
 
 /**
@@ -302,8 +281,9 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
   */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
-  /* Set transmission flag: trasfer complete*/
+  /* Set transmission flag: transfer complete */
   UartReady = SET;
+
 }
 
 /**
@@ -355,7 +335,6 @@ static void Error_Handler(void)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -363,8 +342,8 @@ static void Error_Handler(void)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t *file, uint32_t line)
-{ 
+void assert_failed(char *file, uint32_t line)
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
@@ -374,6 +353,7 @@ void assert_failed(uint8_t *file, uint32_t line)
   }
 }
 #endif
+
 
 /**
   * @}

@@ -2,26 +2,18 @@
   ******************************************************************************
   * @file    tsl_acq_stm32l1xx_sw.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    01-february-2016
   * @brief   This file contains all functions to manage the acquisition
   *          on STM32l1xx products using the software mode.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 20020 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
+  * This software component is licensed by ST under Ultimate Liberty license
+  * SLA0044, the "License"; You may not use this file except in compliance with
+  * the License. You may obtain a copy of the License at:
+  *                             www.st.com/SLA0044
   *
   ******************************************************************************
   */
@@ -821,7 +813,7 @@ void TSL_acq_BankStartAcq(void)
     RI->ASCR2 &= (uint32_t)(~(TSL_BankChannelConf[1]));
 
     /*it's better to implement this like that because it's much more faster than to put this test in the "while test" below */
-    if (MeasurementCounter > TSL_Params.AcqMax)
+    if (MeasurementCounter >= TSL_Params.AcqMax)
     {
       TSL_acq_GroupDone(GroupToCheck);
       __NOP();
@@ -976,12 +968,14 @@ TSL_Bool_enum_T TSL_acq_TestFirstReferenceIsValid(TSL_ChannelData_T *pCh, TSL_tM
 
 #if defined(__IAR_SYSTEMS_ICC__) // IAR/EWARM
 #pragma optimize=low
+void SoftDelay(uint16_t val)
 #elif defined(__CC_ARM) // Keil/MDK-ARM
 #pragma O1
 #pragma Ospace
-#elif defined(__GNUC__) // Atollic/True Studio + Raisonance/RKit
+void SoftDelay(uint16_t val)
+#elif defined(__GNUC__) // Atollic/True Studio + AC6/SW4STM32
 #pragma GCC push_options
-#pragma GCC optimize ("O0")
+void __attribute__((optimize("O0"))) SoftDelay(uint16_t val)
 #endif
 /**
   * @brief  Software delay (private routine)
@@ -989,7 +983,6 @@ TSL_Bool_enum_T TSL_acq_TestFirstReferenceIsValid(TSL_ChannelData_T *pCh, TSL_tM
   * With fHCLK = 32MHz: 1 = ~1탎, 50 = ~14탎, 100 = ~25탎, 200 = ~50탎
   * @retval None
   */
-void SoftDelay(uint16_t val)
 {
   __IO uint16_t idx;
   for (idx = val; idx > 0; idx--)
@@ -1005,10 +998,9 @@ void SwSpreadSpectrum(void)
 #pragma O1
 #pragma Ospace
 __INLINE void SwSpreadSpectrum(void)
-#elif defined(__GNUC__) // Atollic/True Studio + Raisonance/RKit
+#elif defined(__GNUC__) // Atollic/True Studio + AC6/SW4STM32
 #pragma GCC push_options
-#pragma GCC optimize ("O0")
-__INLINE void SwSpreadSpectrum(void)
+void __attribute__((optimize("O0"))) SwSpreadSpectrum(void)
 #endif
 /**
   * @brief  Spread Spectrum using a variable software delay.
@@ -1016,7 +1008,7 @@ __INLINE void SwSpreadSpectrum(void)
   * @retval None
   */
 {
-  uint8_t idx;
+  volatile uint8_t idx;
 
   SpreadCounter++;
 

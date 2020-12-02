@@ -2,26 +2,18 @@
   ******************************************************************************
   * @file    tsl_acq_stm32l1xx_hw.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    01-february-2016
   * @brief   This file contains all functions to manage the acquisition
   *          on STM32l1xx products using the Hardware mode (with Timers).
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 20020 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
+  * This software component is licensed by ST under Ultimate Liberty license
+  * SLA0044, the "License"; You may not use this file except in compliance with
+  * the License. You may obtain a copy of the License at:
+  *                             www.st.com/SLA0044
   *
   ******************************************************************************
   */
@@ -879,7 +871,7 @@ TSL_Bool_enum_T TSL_acq_TestFirstReferenceIsValid(TSL_ChannelData_T *pCh, TSL_tM
 #elif defined(__CC_ARM) // Keil/MDK-ARM
 #pragma O1
 #pragma Ospace
-#elif defined(__GNUC__) // Atollic/True Studio + Raisonance/RKit
+#elif defined(__GNUC__) // Atollic/True Studio + AC6/SW4STM32
 #pragma GCC push_options
 #pragma GCC optimize ("O0")
 #endif

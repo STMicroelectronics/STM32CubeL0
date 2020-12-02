@@ -2,14 +2,12 @@
   ******************************************************************************
   * @file    stm32_adafruit_sd.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    04-November-2015
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32_adafruit_sd.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -161,8 +159,10 @@ typedef struct
 {
   SD_CSD Csd;
   SD_CID Cid;
-  uint32_t CardCapacity;  /* Card Capacity */
-  uint32_t CardBlockSize; /* Card Block Size */
+  uint32_t CardCapacity;              /*!< Card Capacity */
+  uint32_t CardBlockSize;             /*!< Card Block Size */
+  uint32_t LogBlockNbr;               /*!< Specifies the Card logical Capacity in blocks   */
+  uint32_t LogBlockSize;              /*!< Specifies logical block size in bytes           */
 } SD_CardInfo;
 
 /**
@@ -183,7 +183,14 @@ typedef struct
   */
 #define SD_PRESENT               ((uint8_t)0x01)
 #define SD_NOT_PRESENT           ((uint8_t)0x00)
-   
+
+#define SD_DATATIMEOUT           ((uint32_t)100000000)
+
+/** 
+  * @brief SD Card information structure 
+  */   
+#define BSP_SD_CardInfo SD_CardInfo
+
 /**
   * @}
   */
@@ -200,10 +207,10 @@ typedef struct
   * @{
   */   
 uint8_t BSP_SD_Init(void);
-uint8_t BSP_SD_ReadBlocks(uint32_t *pData, uint32_t ReadAddr, uint16_t BlockSize, uint32_t NumberOfBlocks);
-uint8_t BSP_SD_WriteBlocks(uint32_t *pData, uint32_t WriteAddr, uint16_t BlockSize, uint32_t NumberOfBlocks);
+uint8_t BSP_SD_ReadBlocks(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOfBlocks, uint32_t Timeout);
+uint8_t BSP_SD_WriteBlocks(uint32_t *pData, uint32_t WriteAddr, uint32_t NumOfBlocks, uint32_t Timeout);
 uint8_t BSP_SD_Erase(uint32_t StartAddr, uint32_t EndAddr);
-uint8_t BSP_SD_GetStatus(void);
+uint8_t BSP_SD_GetCardState(void);
 uint8_t BSP_SD_GetCardInfo(SD_CardInfo *pCardInfo);
    
 /* Link functions for SD Card peripheral*/

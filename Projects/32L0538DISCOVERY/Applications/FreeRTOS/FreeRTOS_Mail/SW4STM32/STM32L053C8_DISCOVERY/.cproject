@@ -69,8 +69,7 @@
 							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.1061738506" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.358137569" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler">
 								<option id="gnu.both.asm.option.include.paths.574976831" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value=""/>
-									<listOptionValue builtIn="false" value="ROJ_DIR$\..\Inc"/>
+									<listOptionValue builtIn="false" value="../../../Inc"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.440193378" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.1574729007" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>

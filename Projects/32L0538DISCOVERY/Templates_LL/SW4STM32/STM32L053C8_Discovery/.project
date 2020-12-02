@@ -121,10 +121,5 @@
 			<type>1</type>
 			<location>PARENT-5-PROJECT_LOC/Drivers/STM32L0xx_HAL_Driver/Src/stm32l0xx_ll_crs.c</location>
 		</link>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
 	</linkedResources>
 </projectDescription>

@@ -7,7 +7,8 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
   * the "License"; You may not use this file except in compliance with the
@@ -35,7 +36,7 @@
 /** @addtogroup Components
   * @{
   */
-
+    
 /** @addtogroup TYPECSWITCH
   * @{
   */
@@ -76,9 +77,9 @@
   * @{
   */
 typedef struct
-{
+{  
   uint32_t  (*Init)(uint16_t);
-  void      (*DeInit)(uint16_t);
+  void      (*DeInit)(uint16_t); 
   uint32_t  (*PowerOn)(uint16_t);
   uint32_t  (*PowerOff)(uint16_t);
   uint32_t  (*SetMode)(uint16_t, TYPECSWITCH_Mode_t);

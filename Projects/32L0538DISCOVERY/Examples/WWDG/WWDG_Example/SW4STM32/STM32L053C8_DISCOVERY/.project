@@ -77,10 +77,5 @@
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/stm32l0xx_hal_msp.c</location>
 		</link>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
 	</linkedResources>
 </projectDescription>

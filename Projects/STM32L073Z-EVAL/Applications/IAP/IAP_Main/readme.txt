@@ -8,39 +8,15 @@
   * @brief   Description of the AN4657 "STM32L0xx in-application programming
   *          using the USART (IAP)".
   ******************************************************************************
+  * @attention
   *
-  * Copyright (c) 2016 STMicroelectronics International N.V. All rights reserved.
+  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without 
-  * modification, are permitted, provided that the following conditions are met:
-  *
-  * 1. Redistribution of source code must retain the above copyright notice, 
-  *    this list of conditions and the following disclaimer.
-  * 2. Redistributions in binary form must reproduce the above copyright notice,
-  *    this list of conditions and the following disclaimer in the documentation
-  *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other 
-  *    contributors to this software may be used to endorse or promote products 
-  *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this 
-  *    software, must execute solely and exclusively on microcontroller or
-  *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under 
-  *    this license is void and will automatically terminate your rights under 
-  *    this license. 
-  *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-  * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
-  * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-  * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
-  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software component is licensed by ST under Ultimate Liberty license
+  * SLA0044, the "License"; You may not use this file except in compliance with
+  * the License. You may obtain a copy of the License at:
+  *                             www.st.com/SLA0044
   *
   ******************************************************************************
   @endverbatim
@@ -107,7 +83,7 @@ Table 1. IAP implementation on STM32L073Z-EVAL
 |                | ------------------------------------------------------|-------------------------|
 |                | The user application (image to be downloaded with the |                         | 
 |                | IAP) will be programmed starting from address         |                         |
-|                | (uint32_t)0x08004000(1).                              | (Sector 4 - Sector 47)  | 
+|                | (uint32_t)0x08005000(1).                              | (Sector 4 - Sector 47)  | 
 |                | The maximum size of the image to be loaded is:        | (176 Kbytes             | 
 |                | ------------------------------------------------------|-------------------------|
 |                | The image is uploaded with the IAP from the STM32L0xx | 12 Kbytes               | 
@@ -120,7 +96,7 @@ Table 1. IAP implementation on STM32L073Z-EVAL
 |                | USART used                                            |  USART2   (CN6)         |
 \**************************************************************************************************/ 
 (1) User application location address is defined in the flash_if.h file as: 
-#define APPLICATION_ADDRESS           ((uint32_t)0x08004000)
+#define APPLICATION_ADDRESS           ((uint32_t)0x08005000)
 To modify it, change the default value to the desired one. Note that the application must be linked
 relatively to the new address too.
 
@@ -150,7 +126,7 @@ Figure 1. Flash memory usage
                           |                                           |
                           |- - - - - - - - - - - - - - - - - - - - - -|
  It is possible to con-   |          Vector table                     |
- figure the user code     |-------------------------------------------|  0x08004000
+ figure the user code     |-------------------------------------------|  0x08005000
  starting in Bank 2.      |          IAP code                         |
                           |- - - - - - - - - - - - - - - - - - - - - -|
                           |          Vector table                     |

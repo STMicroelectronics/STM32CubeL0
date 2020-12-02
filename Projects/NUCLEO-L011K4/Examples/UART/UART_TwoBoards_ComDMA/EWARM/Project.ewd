@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <project>
   <fileVersion>2</fileVersion>
   <configuration>
-    <name>STM32L011K4_NUCLEO</name>
+    <name>STM32L011K4_NUCLEO_UART_TwoBoards_ComDMA</name>
     <toolchain>
       <name>ARM</name>
     </toolchain>
@@ -1193,7 +1192,7 @@
         <option>
           <name>CCSTLinkResetList</name>
           <version>1</version>
-          <state>0</state>
+          <state>2</state>
         </option>
         <option>
           <name>CCCpuClockEdit</name>
@@ -1348,5 +1347,3 @@
     </debuggerPlugins>
   </configuration>
 </project>
-
-

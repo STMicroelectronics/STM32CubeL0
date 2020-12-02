@@ -6,7 +6,8 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under BSD 3-Clause license,
   * the "License"; You may not use this file except in compliance with the
@@ -25,7 +26,7 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include <stdint.h>
+#include <stdint.h> 
 
 /** @addtogroup BSP
   * @{
@@ -34,7 +35,7 @@
 /** @addtogroup Components
   * @{
   */
-
+    
 /** @addtogroup TS
   * @{
   */
@@ -47,7 +48,7 @@
   * @{
   */
 typedef struct
-{
+{  
   void       (*Init)(uint16_t);
   uint16_t   (*ReadID)(uint16_t);
   void       (*Reset)(uint16_t);
