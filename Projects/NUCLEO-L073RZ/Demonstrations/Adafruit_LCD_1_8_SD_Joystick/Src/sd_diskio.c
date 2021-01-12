@@ -127,7 +127,7 @@ DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_ERROR;
   if(BSP_SD_ReadBlocks((uint32_t*)buff,
-                       (uint64_t)(sector * SD_BLOCK_SIZE),
+                       (uint32_t)(sector),
                        SD_BLOCK_SIZE, count) == MSD_OK)
   {
     /* wait until the read operation is finished */
@@ -154,7 +154,7 @@ DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
   DRESULT res = RES_ERROR;
 
   if(BSP_SD_WriteBlocks((uint32_t*)buff,
-                        (uint64_t)(sector * SD_BLOCK_SIZE),
+                        (uint32_t)(sector),
                         SD_BLOCK_SIZE, count) == MSD_OK)
 
   {

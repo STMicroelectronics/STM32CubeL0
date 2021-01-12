@@ -330,24 +330,22 @@ uint8_t BSP_SD_GetCardInfo(SD_CardInfo *pCardInfo)
 }
 
 /**
-  * @brief  Reads block(s) from a specified address in the SD card, in polling mode.
-  * @param  pData: Pointer to the buffer that will contain the data to transmit
-  * @param  ReadAddr: Address from where data is to be read. The address is counted
-  *                   in blocks of 512bytes
-  * @param  NumOfBlocks: Number of SD blocks to read
-  * @param  Timeout: This parameter is used for compatibility with BSP implementation
+  * @brief  Reads block(s) from a specified address in the SD card, in polling mode. 
+  * @param  pData: Pointer to the buffer that will contain the data to read
+  * @param  ReadAddr: SD block address from where data is to be read  
+  * @param  BlockSize: SD card data block size, that should be 512
+  * @param  NumOfBlocks: Number of SD blocks to read 
   * @retval SD status
   */
-uint8_t BSP_SD_ReadBlocks(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOfBlocks, uint32_t Timeout)
+uint8_t BSP_SD_ReadBlocks(uint32_t* pData, uint32_t ReadAddr, uint16_t BlockSize, uint32_t NumberOfBlocks)
 {
   uint32_t offset = 0;
   uint32_t addr;
   uint8_t retr = BSP_SD_ERROR;
   uint8_t *ptr = NULL;
   SD_CmdAnswer_typedef response;
-  uint16_t BlockSize = 512;
-
-  /* Send CMD16 (SD_CMD_SET_BLOCKLEN) to set the size of the block and
+  
+  /* Send CMD16 (SD_CMD_SET_BLOCKLEN) to set the size of the block and 
      Check if the SD acknowledged the set block length command: R1 response (0x00: no errors) */
   response = SD_SendCmd(SD_CMD_SET_BLOCKLEN, BlockSize, 0xFF, SD_ANSWER_R1_EXPECTED);
   SD_IO_CSState(1);
@@ -364,11 +362,15 @@ uint8_t BSP_SD_ReadBlocks(uint32_t *pData, uint32_t ReadAddr, uint32_t NumOfBloc
   }
   memset(ptr, SD_DUMMY_BYTE, sizeof(uint8_t)*BlockSize);
 
-  /* Initialize the address */
+  /* Initialize the address.
+   * Cards 2 GB or less use byte addresses while cards greater than 2 GB must
+   * use sector (block) number in CMD17.  We adjust for that here while the higher
+   * levels of the driver deal with sectors exclusively.
+   */
   addr = (ReadAddr * ((flag_SDHC == 1) ? 1 : BlockSize));
 
   /* Data transfer */
-  while (NumOfBlocks--)
+  while (NumberOfBlocks--)
   {
     /* Send CMD17 (SD_CMD_READ_SINGLE_BLOCK) to read one block */
     /* Check if the SD acknowledged the read block command: R1 response (0x00: no errors) */
@@ -415,24 +417,22 @@ error :
 }
 
 /**
-  * @brief  Writes block(s) to a specified address in the SD card, in polling mode.
+  * @brief  Writes block(s) to a specified address in the SD card, in polling mode. 
   * @param  pData: Pointer to the buffer that will contain the data to transmit
-  * @param  WriteAddr: Address from where data is to be written. The address is counted
-  *                   in blocks of 512bytes
+  * @param  WriteAddr: SD block address to where data is to be written  
+  * @param  BlockSize: SD card data block size, that should be 512
   * @param  NumOfBlocks: Number of SD blocks to write
-  * @param  Timeout: This parameter is used for compatibility with BSP implementation
   * @retval SD status
   */
-uint8_t BSP_SD_WriteBlocks(uint32_t *pData, uint32_t WriteAddr, uint32_t NumOfBlocks, uint32_t Timeout)
+uint8_t BSP_SD_WriteBlocks(uint32_t* pData, uint32_t WriteAddr, uint16_t BlockSize, uint32_t NumberOfBlocks)
 {
   uint32_t offset = 0;
   uint32_t addr;
   uint8_t retr = BSP_SD_ERROR;
   uint8_t *ptr = NULL;
   SD_CmdAnswer_typedef response;
-  uint16_t BlockSize = 512;
-
-  /* Send CMD16 (SD_CMD_SET_BLOCKLEN) to set the size of the block and
+  
+  /* Send CMD16 (SD_CMD_SET_BLOCKLEN) to set the size of the block and 
      Check if the SD acknowledged the set block length command: R1 response (0x00: no errors) */
   response = SD_SendCmd(SD_CMD_SET_BLOCKLEN, BlockSize, 0xFF, SD_ANSWER_R1_EXPECTED);
   SD_IO_CSState(1);
@@ -452,7 +452,7 @@ uint8_t BSP_SD_WriteBlocks(uint32_t *pData, uint32_t WriteAddr, uint32_t NumOfBl
   addr = (WriteAddr * ((flag_SDHC == 1) ? 1 : BlockSize));
 
   /* Data transfer */
-  while (NumOfBlocks--)
+  while (NumberOfBlocks--)
   {
     /* Send CMD24 (SD_CMD_WRITE_SINGLE_BLOCK) to write blocks  and
        Check if the SD acknowledged the write block command: R1 response (0x00: no errors) */
@@ -512,7 +512,7 @@ uint8_t BSP_SD_Erase(uint32_t StartAddr, uint32_t EndAddr)
 {
   uint8_t retr = BSP_SD_ERROR;
   SD_CmdAnswer_typedef response;
-  uint16_t BlockSize = 512;
+  const uint16_t BlockSize = 512;
 
   /* Send CMD32 (Erase group start) and check if the SD acknowledged the erase command: R1 response (0x00: no errors) */
   response = SD_SendCmd(SD_CMD_SD_ERASE_GRP_START, (StartAddr) * (flag_SDHC == 1 ? 1 : BlockSize), 0xFF, SD_ANSWER_R1_EXPECTED);
@@ -520,7 +520,7 @@ uint8_t BSP_SD_Erase(uint32_t StartAddr, uint32_t EndAddr)
   SD_IO_WriteByte(SD_DUMMY_BYTE);  if (response.r1 == SD_R1_NO_ERROR)
   {
     /* Send CMD33 (Erase group end) and Check if the SD acknowledged the erase command: R1 response (0x00: no errors) */
-    response = SD_SendCmd(SD_CMD_SD_ERASE_GRP_END, (EndAddr*512) * (flag_SDHC == 1 ? 1 : BlockSize), 0xFF, SD_ANSWER_R1_EXPECTED);
+    response = SD_SendCmd(SD_CMD_SD_ERASE_GRP_END, (EndAddr) * (flag_SDHC == 1 ? 1 : BlockSize), 0xFF, SD_ANSWER_R1_EXPECTED);
     SD_IO_CSState(1);
     SD_IO_WriteByte(SD_DUMMY_BYTE);
     if (response.r1 == SD_R1_NO_ERROR)
