@@ -190,6 +190,17 @@
 
 #define USE_SPI_CRC                   1U
 
+/* ################## USB peripheral configuration ########################## */
+
+/* To reduce memory footprint of entire USB stack we can reduce the
+ * amount of supported 'IN' and/or 'OUT' endpoints in the PCD HAL driver.
+ * If this HAL driver is used combination with the ST USB Device Library
+ * this will also modify the 'USBD_MAX_NUM_ENDPOINT_IN' and 'USBD_MAX_NUM_ENDPOINT_OUT'
+ * parameters accordingly
+ */
+// #define HAL_PCD_NUM_ENDPOINTS_IN      3U
+// #define HAL_PCD_NUM_ENDPOINTS_OUT     3U
+
 /* Includes ------------------------------------------------------------------*/
 /**
   * @brief Include module's header file 

@@ -65,6 +65,14 @@ extern "C" {
 #define USBD_SUPPORT_USER_STRING_DESC                   0U
 #endif /* USBD_SUPPORT_USER_STRING_DESC */
 
+#ifndef USBD_MAX_NUM_ENDPOINT_IN
+#define USBD_MAX_NUM_ENDPOINT_IN                        16U
+#endif /* USBD_MAX_NUM_ENDPOINT_IN */
+
+#ifndef USBD_MAX_NUM_ENDPOINT_OUT
+#define USBD_MAX_NUM_ENDPOINT_OUT                       16U
+#endif /* USBD_MAX_NUM_ENDPOINT_OUT */
+
 #define  USB_LEN_DEV_QUALIFIER_DESC                     0x0AU
 #define  USB_LEN_DEV_DESC                               0x12U
 #define  USB_LEN_CFG_DESC                               0x09U
@@ -145,7 +153,6 @@ extern "C" {
 #define USBD_EP_TYPE_ISOC                               0x01U
 #define USBD_EP_TYPE_BULK                               0x02U
 #define USBD_EP_TYPE_INTR                               0x03U
-
 
 /**
   * @}
@@ -241,8 +248,8 @@ typedef struct _USBD_HandleTypeDef
   uint32_t                dev_default_config;
   uint32_t                dev_config_status;
   USBD_SpeedTypeDef       dev_speed;
-  USBD_EndpointTypeDef    ep_in[16];
-  USBD_EndpointTypeDef    ep_out[16];
+  USBD_EndpointTypeDef    ep_in[USBD_MAX_NUM_ENDPOINT_IN];
+  USBD_EndpointTypeDef    ep_out[USBD_MAX_NUM_ENDPOINT_OUT];
   uint32_t                ep0_state;
   uint32_t                ep0_data_len;
   uint8_t                 dev_state;

@@ -89,6 +89,19 @@ typedef USB_TypeDef        PCD_TypeDef;
 typedef USB_CfgTypeDef     PCD_InitTypeDef;
 typedef USB_EPTypeDef      PCD_EPTypeDef;
 
+/**
+ * Default value for HAL_PCD_NUM_ENDPOINTS_IN
+ */
+#ifndef HAL_PCD_NUM_ENDPOINTS_IN
+#define HAL_PCD_NUM_ENDPOINTS_IN 8U
+#endif /* HAL_PCD_NUM_ENDPOINTS_IN */
+
+/**
+ * Default value for HAL_PCD_NUM_ENDPOINTS_OUT
+ */
+#ifndef HAL_PCD_NUM_ENDPOINTS_OUT
+#define HAL_PCD_NUM_ENDPOINTS_OUT 8U
+#endif /* HAL_PCD_NUM_ENDPOINTS_OUT */
 
 /**
   * @brief  PCD Handle Structure definition
@@ -102,8 +115,8 @@ typedef struct
   PCD_TypeDef             *Instance;   /*!< Register base address             */
   PCD_InitTypeDef         Init;        /*!< PCD required parameters           */
   __IO uint8_t            USB_Address; /*!< USB Address                       */
-  PCD_EPTypeDef           IN_ep[8];   /*!< IN endpoint parameters             */
-  PCD_EPTypeDef           OUT_ep[8];  /*!< OUT endpoint parameters            */
+  PCD_EPTypeDef           IN_ep[HAL_PCD_NUM_ENDPOINTS_IN];    /*!< IN endpoint parameters             */
+  PCD_EPTypeDef           OUT_ep[HAL_PCD_NUM_ENDPOINTS_OUT];   /*!< OUT endpoint parameters            */
   HAL_LockTypeDef         Lock;        /*!< PCD peripheral status             */
   __IO PCD_StateTypeDef   State;       /*!< PCD communication state           */
   __IO  uint32_t          ErrorCode;   /*!< PCD Error code                    */
