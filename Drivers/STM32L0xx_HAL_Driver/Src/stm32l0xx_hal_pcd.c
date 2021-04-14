@@ -1005,14 +1005,16 @@ HAL_StatusTypeDef HAL_PCD_Stop(PCD_HandleTypeDef *hpcd)
   */
 void HAL_PCD_IRQHandler(PCD_HandleTypeDef *hpcd)
 {
-  if (__HAL_PCD_GET_FLAG(hpcd, USB_ISTR_CTR))
+  uint16_t wIstr = hpcd->Instance->ISTR;
+ 
+  if (wIstr & USB_ISTR_CTR)
   {
     /* servicing of the endpoint correct transfer interrupt */
     /* clear of the CTR flag into the sub */
     (void)PCD_EP_ISR_Handler(hpcd);
   }
 
-  if (__HAL_PCD_GET_FLAG(hpcd, USB_ISTR_RESET))
+  if (wIstr & USB_ISTR_RESET)
   {
     __HAL_PCD_CLEAR_FLAG(hpcd, USB_ISTR_RESET);
 
@@ -1025,17 +1027,17 @@ void HAL_PCD_IRQHandler(PCD_HandleTypeDef *hpcd)
     (void)HAL_PCD_SetAddress(hpcd, 0U);
   }
 
-  if (__HAL_PCD_GET_FLAG(hpcd, USB_ISTR_PMAOVR))
+  if (wIstr & USB_ISTR_PMAOVR)
   {
     __HAL_PCD_CLEAR_FLAG(hpcd, USB_ISTR_PMAOVR);
   }
 
-  if (__HAL_PCD_GET_FLAG(hpcd, USB_ISTR_ERR))
+  if (wIstr & USB_ISTR_ERR)
   {
     __HAL_PCD_CLEAR_FLAG(hpcd, USB_ISTR_ERR);
   }
 
-  if (__HAL_PCD_GET_FLAG(hpcd, USB_ISTR_WKUP))
+  if (wIstr & USB_ISTR_WKUP)
   {
     hpcd->Instance->CNTR &= (uint16_t) ~(USB_CNTR_LPMODE);
     hpcd->Instance->CNTR &= (uint16_t) ~(USB_CNTR_FSUSP);
@@ -1059,7 +1061,7 @@ void HAL_PCD_IRQHandler(PCD_HandleTypeDef *hpcd)
     __HAL_PCD_CLEAR_FLAG(hpcd, USB_ISTR_WKUP);
   }
 
-  if (__HAL_PCD_GET_FLAG(hpcd, USB_ISTR_SUSP))
+  if (wIstr & USB_ISTR_SUSP)
   {
     /* Force low-power mode in the macrocell */
     hpcd->Instance->CNTR |= (uint16_t)USB_CNTR_FSUSP;
@@ -1077,7 +1079,7 @@ void HAL_PCD_IRQHandler(PCD_HandleTypeDef *hpcd)
   }
 
   /* Handle LPM Interrupt */
-  if (__HAL_PCD_GET_FLAG(hpcd, USB_ISTR_L1REQ))
+  if (wIstr & USB_ISTR_L1REQ)
   {
     __HAL_PCD_CLEAR_FLAG(hpcd, USB_ISTR_L1REQ);
     if (hpcd->LPM_State == LPM_L0)
@@ -1104,7 +1106,7 @@ void HAL_PCD_IRQHandler(PCD_HandleTypeDef *hpcd)
     }
   }
 
-  if (__HAL_PCD_GET_FLAG(hpcd, USB_ISTR_SOF))
+  if (wIstr & USB_ISTR_SOF)
   {
     __HAL_PCD_CLEAR_FLAG(hpcd, USB_ISTR_SOF);
 
@@ -1115,7 +1117,7 @@ void HAL_PCD_IRQHandler(PCD_HandleTypeDef *hpcd)
 #endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
   }
 
-  if (__HAL_PCD_GET_FLAG(hpcd, USB_ISTR_ESOF))
+  if (wIstr & USB_ISTR_ESOF)
   {
     /* clear ESOF flag in ISTR */
     __HAL_PCD_CLEAR_FLAG(hpcd, USB_ISTR_ESOF);
