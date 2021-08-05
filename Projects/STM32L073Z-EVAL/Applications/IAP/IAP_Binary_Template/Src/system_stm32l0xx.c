@@ -164,7 +164,7 @@ void SystemInit (void)
 }
 
 /**
-  * @brief  Update SystemCoreClock according to Clock Register Values
+  * @brief  Update SystemCoreClock variable according to Clock Register Values.
   *         The SystemCoreClock variable contains the core clock (HCLK), it can
   *         be used by the user application to setup the SysTick timer or configure
   *         other parameters.
