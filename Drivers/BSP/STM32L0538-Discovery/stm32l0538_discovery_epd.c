@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright(c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -86,8 +85,11 @@ uint8_t BSP_EPD_Init(void)
   /* Default value for the Font */
   pFont = &Font16;
 
+#if defined (USE_STM32L0538_DISCO_REV_B03)
+  epd_drv = &gdem0213b74_drv;
+#else /* USE_STM32L0538_DISCO */
   epd_drv = &gde021a1_drv;
-
+#endif /* USE_STM32L0538_DISCO_REV_B03 */
   /* EPD Init */
   epd_drv->Init();
 
@@ -150,13 +152,21 @@ sFONT *BSP_EPD_GetFont(void)
 void BSP_EPD_Clear(uint16_t Color)
 {
   uint32_t index = 0;
-
+#if defined (USE_STM32L0538_DISCO_REV_B03)
+  epd_drv->SetDisplayWindow(1, 0, 250, 31);
+  
+  for(index = 0; index < 6000; index++)
+  {
+      epd_drv->WritePixel(Color);
+  }
+#else /* USE_STM32L0538_DISCO */
   epd_drv->SetDisplayWindow(0, 0, 171, 17);
 
   for(index = 0; index < 3096; index++)
   {
       epd_drv->WritePixel(Color);
   }
+#endif /* USE_STM32L0538_DISCO_REV_B03 */
 }
 
 /**
@@ -432,5 +442,3 @@ static void  DrawChar(uint16_t Xpos, uint16_t Ypos, const uint8_t *c)
 /**
   * @}
   */ 
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

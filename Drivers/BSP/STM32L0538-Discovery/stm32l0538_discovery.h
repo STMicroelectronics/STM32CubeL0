@@ -7,16 +7,20 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright(c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
+
+/* IMPORTANT: One of the following flags must be defined in the preprocessor */
+/* Options in order to select the target board revision: !!!!!!!!!! */
+/* USE_STM32L0538_DISCO_ */          /* Applicable for all boards execept STM32L0538 DISCOVERY REV B-03 */
+/* USE_STM32L0538_DISCO_REV_B03 */   /* Applicable only for STM32L0538 DISCOVERY REV B-03 */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __STM32L0538_DISCOVERY_H
@@ -72,8 +76,8 @@ typedef enum
 /**
   * @brief  Define for STM32L0538_DISCO board
   */
-#if !defined (USE_STM32L0538_DISCO)
- #define USE_STM32L0538_DISCO
+#if !defined(USE_STM32L0538_DISCO_REV_B03) && !defined(USE_STM32L0538_DISCO)
+#define USE_STM32L0538_DISCO
 #endif
 
 /** @addtogroup STM32L0538_DISCOVERY_LOW_LEVEL_LED
@@ -155,6 +159,9 @@ typedef enum
 /* EPD PWR macro definition */
 #define EPD_PWR_LOW()           HAL_GPIO_WritePin(EPD_PWR_GPIO_PORT, EPD_PWR_PIN, GPIO_PIN_RESET)
 #define EPD_PWR_HIGH()          HAL_GPIO_WritePin(EPD_PWR_GPIO_PORT, EPD_PWR_PIN, GPIO_PIN_SET)
+
+/* EPD get state macro definition */
+#define isEPD_BUSY()            HAL_GPIO_ReadPin(EPD_BUSY_GPIO_PORT, EPD_BUSY_PIN)
 
 /**
   * @brief  EPD Control pin
@@ -238,5 +245,3 @@ uint32_t  BSP_PB_GetState(Button_TypeDef Button);
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

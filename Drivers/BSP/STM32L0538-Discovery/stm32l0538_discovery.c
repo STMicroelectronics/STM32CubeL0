@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright(c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -102,6 +101,9 @@ void                      EPD_IO_WriteData(uint16_t RegValue);
 void                      EPD_IO_WriteReg(uint8_t Reg);
 uint16_t                  EPD_IO_ReadData(void);
 void                      EPD_Delay(uint32_t delay);
+void                      EPD_ReadBusy(void);
+void                      EPD_IO_Reset_Low(void);
+void                      EPD_IO_Reset_High(void);
 /**
   * @}
   */
@@ -489,6 +491,43 @@ void EPD_Delay (uint32_t Delay)
 }
 
 /**
+  * @brief  wait for the EPD to be ready.
+  * @param  None.
+  * @retval None
+  */
+void EPD_ReadBusy(void)
+{ 
+  while(1)
+  {	
+    /* BUSY = 1 */
+    if(isEPD_BUSY() == 0)
+    {
+      break;
+    }
+  }
+}
+
+/**
+  * @brief  EPD Reset Low.
+  * @param  None.
+  * @retval None
+  */
+void EPD_IO_Reset_Low(void)
+{
+  EPD_RESET_LOW();
+}
+
+/**
+  * @brief  EPD Reset High.
+  * @param  None.
+  * @retval None
+  */
+void EPD_IO_Reset_High(void)
+{
+  EPD_RESET_HIGH();
+}
+
+/**
   * @}
   */
 
@@ -503,5 +542,3 @@ void EPD_Delay (uint32_t Delay)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
