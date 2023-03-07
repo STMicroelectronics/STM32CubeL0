@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -75,7 +74,7 @@ to be received.
 
 Slave directly goes in while loop and call spi receive function to wait for 
 master clock and characters to be received.
-When done, Slave computes command and data lenght to determine if command is 
+When done, Slave computes command and data length to determine if command is 
 known. If yes acknowledge bytes are send else non-acknowledge bytes are sent.
 In case command is valid, Slave pursues by executing command.
 If Read command is performed, received buffer is compared with the one supposed 
@@ -84,7 +83,7 @@ Then acknowledge is again sent to Master.
 
 If the Master board is used, the "#define MASTER_BOARD" must be uncommented.
 If the Slave board is used the "#define MASTER_BOARD" must be commented.
-If Interrupt mode is choosen, "#define SPI_MODE_IT" must be uncommented
+If Interrupt mode is chosen, "#define SPI_MODE_IT" must be uncommented
 
 LED2 can be used to monitor the transfer status:
  - LED2 turns ON on master board waiting user button to be pressed.
@@ -148,6 +147,6 @@ In order to make the program work, you must do the following :
 - Rebuild all files and load your image into target memory
 - Run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
  

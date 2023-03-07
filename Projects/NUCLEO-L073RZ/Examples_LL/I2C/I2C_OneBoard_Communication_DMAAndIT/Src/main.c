@@ -5,32 +5,15 @@
   * @brief   This example describes how to send/receive bytes over I2C IP using
   *          the STM32L0xx I2C LL API.
   *          Peripheral initialization done using LL unitary services functions.
-******************************************************************************
+  ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -151,7 +134,7 @@ int main(void)
   * @note   This function is used to :
   *         -1- Enable DMA1 clock
   *         -2- Configure NVIC for DMA1.
-  *         -3- Configure the DMA1 functionnal parameters.
+  *         -3- Configure the DMA1 functional parameters.
   *         -4- Enable DMA1 interrupts complete/error.
   * @param   None
   * @retval  None
@@ -165,7 +148,7 @@ void Configure_DMA(void)
   NVIC_SetPriority(DMA1_Channel2_3_IRQn, 0);
   NVIC_EnableIRQ(DMA1_Channel2_3_IRQn);
 
-  /* (3) Configure the DMA1 functionnal parameters */
+  /* (3) Configure the DMA1 functional parameters */
   LL_DMA_ConfigTransfer(DMA1, LL_DMA_CHANNEL_2, LL_DMA_DIRECTION_MEMORY_TO_PERIPH | \
                                                 LL_DMA_PRIORITY_HIGH              | \
                                                 LL_DMA_MODE_NORMAL                | \
@@ -698,7 +681,7 @@ void Slave_Reception_Callback(void)
   */
 void Slave_Complete_Callback(void)
 {
-  /* Check if datas request to turn on the LED2 */
+  /* Check if data request to turn on the LED2 */
   if(Buffercmp8((uint8_t*)aReceiveBuffer, (uint8_t*)aLedOn, (ubReceiveIndex-1)) == 0)
   {
     /* Turn LED2 On:
@@ -783,5 +766,3 @@ void assert_failed(uint8_t *file, uint32_t line)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

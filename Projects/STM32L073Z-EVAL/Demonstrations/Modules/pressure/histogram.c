@@ -6,15 +6,14 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
-  ******************************************************************************
+  *******************************************************************************
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -289,7 +288,7 @@ HISTO_RETURN CurveAddPoint(HistogramDisplay_Typedef * pHisto, uint32_t value, ui
     BSP_LCD_SetTextColor(LCD_COLOR_RED);
     BSP_LCD_DrawPixel(pHisto->curve_index, PointY);
     
-    /* Sav position */
+    /* Save position */
     pHisto->curve_tab2[pHisto->curve_index] = PointY;
   }
 
@@ -422,6 +421,3 @@ static uint32_t GetMaxValue(HistogramDisplay_Typedef * pHisto)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-

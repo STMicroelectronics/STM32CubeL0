@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -64,7 +63,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
   /* Enable LPUART1 clock */
   USARTx_CLK_ENABLE(); 
    
-  /*##-2- Configue the LPUART1 clock soucre ######################################*/
+  /*##-2- Configure the LPUART1 clock source ######################################*/
 #ifdef LPUART1_CLOCK_SOURCE_LSE
   /* -a- Enable LSE Oscillator */
   RCC_OscInitStruct.OscillatorType =  RCC_OSCILLATORTYPE_LSE;
@@ -141,5 +140,3 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

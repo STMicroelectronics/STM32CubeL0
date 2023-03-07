@@ -1,10 +1,53 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head></head>
-<body><font color="blue"><b><u>STM32CubeL0 Firmware Package V1.11.3 / 07-August-2020</u></b></font><br>
-<br>
-<b><u>Main Changes</u></b><br><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="color: black; font-family: Verdana,sans-serif; font-size: 10pt;">Patch release to fix known defects and enhancements implementation.</span></li><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="color: black; font-family: Verdana,sans-serif; font-size: 10pt;">Add new stm32l0xx_hal_timebase_tim_template.c template driver to configure timebase using TIMER.<br></span></li></ul><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-family: Verdana,sans-serif; font-size: 10pt;">Update<span>&nbsp;</span></span><span style="font-family: Verdana,sans-serif; font-size: 10pt;">GPIO initialization sequence</span><span style="font-family: Verdana,sans-serif; font-size: 10pt;"><span style="font-weight: bold;"><span>&nbsp;</span></span>to avoid unwanted pulse on GPIO Pin's.</span></li></ul><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-family: Verdana,sans-serif; font-size: 10pt;" lang="EN-US">Update HAL_I2C_ER_IRQHandler() API to fix acknowledge failure issue with I2C memory IT processes</span></li></ul><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-family: Verdana,sans-serif; font-size: 10pt;" lang="EN-US">Update
-I2C_DMAXferCplt(), I2C_DMAError() and I2C_DMAAbort() APIs to fix
-hardfault issue when hdmatx and hdmarx parameters in i2c handle aren't
-initialized (NULL pointer).</span></li></ul><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-family: Verdana,sans-serif; font-size: 10pt;" lang="EN-US">Minor rework on USBD_Start() and USBD_Stop() APIs: stopping device will be handled by HAL_PCD_DeInit() API.</span></li></ul></ul>
-<p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 67.65pt; text-indent: -18pt; line-height: normal;"><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;,&quot;serif&quot;; color: black;"><o:p></o:p></span></p>
-</body></html>
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252">
+  </head>
+  <body>
+    <font color="blue"><b><u>STM32CubeL0 Firmware Package V1.12.2 /
+          27-January-2023</u></b></font><br>
+    <br>
+    <b><u>Main Changes</u></b><br>
+    <ul>
+      <li>
+        <h3
+          id="patch-release-to-fix-known-defects-and-enhancements-implementation."
+          style="font-family: -apple-system, BlinkMacSystemFont,
+          &quot;Segoe UI&quot;, Roboto, Ubuntu, &quot;Helvetica
+          Neue&quot;, Helvetica, sans-serif; line-height: 1.2;
+          text-size-adjust: 100%; font-size: calc(1rem *
+          var(--heading-ratio)); margin: calc(1.5 *
+          var(--universal-margin)) var(--universal-margin); font-weight:
+          500; padding-left: calc(2 * var(--universal-margin)); color:
+          rgb(17, 17, 17); font-style: normal; font-variant-ligatures:
+          normal; font-variant-caps: normal; letter-spacing: normal;
+          orphans: 2; text-align: start; text-indent: 0px;
+          text-transform: none; white-space: normal; widows: 2;
+          word-spacing: 0px; -webkit-text-stroke-width: 0px;
+          text-decoration-thickness: initial; text-decoration-style:
+          initial; text-decoration-color: initial;">Patch release to fix
+          known defects and enhancements implementation.</h3>
+      </li>
+      <li>
+        <h3
+          id="patch-release-to-fix-known-defects-and-enhancements-implementation."
+          style="font-family: -apple-system, BlinkMacSystemFont,
+          &quot;Segoe UI&quot;, Roboto, Ubuntu, &quot;Helvetica
+          Neue&quot;, Helvetica, sans-serif; line-height: 1.2;
+          text-size-adjust: 100%; font-size: calc(1rem *
+          var(--heading-ratio)); margin: calc(1.5 *
+          var(--universal-margin)) var(--universal-margin); font-weight:
+          500; padding-left: calc(2 * var(--universal-margin)); color:
+          rgb(17, 17, 17); font-style: normal; font-variant-ligatures:
+          normal; font-variant-caps: normal; letter-spacing: normal;
+          orphans: 2; text-align: start; text-indent: 0px;
+          text-transform: none; white-space: normal; widows: 2;
+          word-spacing: 0px; -webkit-text-stroke-width: 0px;
+          text-decoration-thickness: initial; text-decoration-style:
+          initial; text-decoration-color: initial;">All source files: updates disclimer 
+          to add reference to the new license agreement.</h3>
+      </li>
+    </ul>
+  </body>
+</html>

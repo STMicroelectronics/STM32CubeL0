@@ -6,15 +6,14 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
-  ******************************************************************************
+  *******************************************************************************
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -87,7 +86,7 @@ int main(void)
   BSP_LED_Init(LED4);
 
   HAL_NVIC_SetPriority(EXTI4_15_IRQn, 1, 0);
-  /* Reset Idd measurement component if not reseting from standby mode */
+  /* Reset Idd measurement component if not resetting from standby mode */
   if (__HAL_PWR_GET_FLAG(PWR_FLAG_SB) == RESET)
   {
     BSP_IDD_Reset();
@@ -157,7 +156,7 @@ void DecodeMFXInterrupt(uint32_t *ptJoyState, uint32_t *ptIddState)
      BSP_IO_ITClear();
    }
 
-   /* Note : Since the IDD interupts are no more used, it is not necessary
+   /* Note : Since the IDD interrupts are no more used, it is not necessary
     * to check for the IDD_Termination_Measurement interrupt
     * and the IDD_Error interrupt
     */
@@ -1006,5 +1005,3 @@ void assert_failed(uint8_t *file, uint32_t line)
 /**
 * @}
 */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

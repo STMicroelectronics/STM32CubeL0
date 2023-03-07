@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -34,7 +33,7 @@ indicates that device is running at 2.097 MHz.
 The User push-button can be pressed to set system in LowPowerRun mode (Freq: 65KHz). 
 In this case LED2 toggling SLOW(400-ms blinking period).
 
-LED toggling speed is controled by variable "uhLedBlinkSpeed".
+LED toggling speed is controlled by variable "uhLedBlinkSpeed".
 
 @note To measure the current consumption in Run mode, remove JP6 jumper 
       and connect an ampere meter to JP6 to measure IDD current.
@@ -75,5 +74,5 @@ In order to make the program work, you must do the following :
  - Rebuild all files and load your image into target memory
  - Run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -37,7 +36,7 @@
 #define SPI_NACK_BYTES            0xDEAD
 #define SPI_TIMEOUT_MAX           0x1000
 
-/* Defines used for tranfer communication*/
+/* Defines used for transfer communication*/
 #define ADDRCMD_MASTER_READ                         ((uint16_t)0x1234)
 #define ADDRCMD_MASTER_WRITE                        ((uint16_t)0x5678)
 #define COM_LENGTH                                  ((uint16_t)0x0020)
@@ -165,7 +164,7 @@ int main(void)
       comstatus = Master_Read_Data(aRxBuffer, COM_LENGTH);
     }while(comstatus == ADVCOM_NACK);
     
-    /* If communication status is ok, check received datas */
+    /* If communication status is ok, check received data */
     if(comstatus == ADVCOM_ACK)
     {
       /* Compare received buffer with one expected from slave */
@@ -242,7 +241,7 @@ int main(void)
       DataValid = RESET;
     }
     
-    /* Send ackowledge to Master */
+    /* Send acknowledge to Master */
     Slave_Send_Ack(DataValid);
     
     /* Treat command if Chip Select still Low and command is a valid data*/
@@ -270,7 +269,7 @@ int main(void)
         }
       }
       
-      /* Send ackowledge if Chip Select still Low */
+      /* Send acknowledge if Chip Select still Low */
       if(CsTriggered == GPIO_PIN_RESET)
       {
         Slave_Send_Ack(DataValid);
@@ -288,7 +287,7 @@ int main(void)
 
 #ifdef MASTER_BOARD
 /**
-  * @brief  Send a read command to slave, then receive datas through SPI
+  * @brief  Send a read command to slave, then receive data through SPI
   * @param  pBuffer : pointer to the buffer containing the data to be read through SPI.
   * @param  NumByteToWrite: Number of bytes to read.
   * @retval   ADVCOM_ERROR, ADVCOM_ACK or ADVCOM_NACK
@@ -307,7 +306,7 @@ static ADVCOM_StatusTypeDef Master_Read_Data(uint8_t* pBuffer, uint16_t NumByteT
   /* Wait 5 ms */
   HAL_Delay(5);
   
-  /* Check for ackowledge bytes sent by Slave */
+  /* Check for acknowledge bytes sent by Slave */
   ret = Master_Check_Ack();
 
   /* Set chip select High at the end of the transmission */ 
@@ -330,7 +329,7 @@ static ADVCOM_StatusTypeDef Master_Read_Data(uint8_t* pBuffer, uint16_t NumByteT
   /* Call SPI read function to receive data from slave */
   SPI_IO_Read(pBuffer, NumByteToRead);
   
-  /* Check for ackowledge bytes sent by Slave */
+  /* Check for acknowledge bytes sent by Slave */
   ret = Master_Check_Ack();
 
   /* Set chip select High at the end of the transmission */ 
@@ -340,7 +339,7 @@ static ADVCOM_StatusTypeDef Master_Read_Data(uint8_t* pBuffer, uint16_t NumByteT
 }
 
 /**
-  * @brief  Send a write command to slave, then send datas through SPI
+  * @brief  Send a write command to slave, then send data through SPI
   * @param  pBuffer : pointer to the buffer containing the data to be written through SPI.
   * @param  NumByteToWrite: Number of bytes to write.
   * @retval   ADVCOM_ERROR, ADVCOM_ACK or ADVCOM_NACK
@@ -358,7 +357,7 @@ static ADVCOM_StatusTypeDef Master_Write_Data(uint8_t* pBuffer, uint16_t NumByte
   
   HAL_Delay(5);
   
-  /* Check for ackowledge bytes sent by Slave */
+  /* Check for acknowledge bytes sent by Slave */
   ret = Master_Check_Ack();
   
   /* Set chip select High at the end of the transmission */ 
@@ -381,7 +380,7 @@ static ADVCOM_StatusTypeDef Master_Write_Data(uint8_t* pBuffer, uint16_t NumByte
   /* Call SPI write function to send data to slave */
   SPI_IO_Write(pBuffer, NumByteToWrite);
   
-  /* Check for ackowledge bytes sent by Slave */
+  /* Check for acknowledge bytes sent by Slave */
   ret = Master_Check_Ack();
 
   /* Set chip select High at the end of the transmission */ 
@@ -483,7 +482,7 @@ static void Slave_Send_Ack(FlagStatus DataOk)
 #endif /* MASTER_BOARD */
 
 /**
-  * @brief  Writes data through SPI. This function calls low layer fonction SPI_Write which redirects
+  * @brief  Writes data through SPI. This function calls low layer function SPI_Write which redirects
                 to SPI HAL function according to selected mode (Polling, IT)
   * @param  pBuffer : pointer to the buffer containing the data to be written through SPI.
   * @param  NumByteToWrite: Number of bytes to write.
@@ -492,7 +491,7 @@ static void Slave_Send_Ack(FlagStatus DataOk)
 static void SPI_IO_Write(uint8_t* pBuffer, uint16_t NumByteToWrite)
 {
 #if defined(SPI_MODE_IT)
-  /* Reset volatile varaible before transmission*/
+  /* Reset volatile variable before transmission*/
   SpiReady = RESET;
 #endif
 
@@ -510,7 +509,7 @@ static void SPI_IO_Write(uint8_t* pBuffer, uint16_t NumByteToWrite)
 }
 
 /**
-    * @brief  Read data through SPI. This function calls low layer fonction SPI_Read which redirects
+    * @brief  Read data through SPI. This function calls low layer function SPI_Read which redirects
                   to SPI HAL function according to selected mode (Polling, IT)
     * @param  pBuffer : pointer to the buffer containing the data to be read through SPI.
     * @param  NumByteToRead: Number of bytes to read.
@@ -519,7 +518,7 @@ static void SPI_IO_Write(uint8_t* pBuffer, uint16_t NumByteToWrite)
 static void SPI_IO_Read(uint8_t* pBuffer, uint16_t NumByteToRead)
 {
 #if defined(SPI_MODE_IT)
-  /* Reset volatile varaible before transmission*/
+  /* Reset volatile variable before transmission*/
   SpiReady = RESET;
 #endif
 
@@ -772,5 +771,3 @@ void assert_failed(uint8_t *file, uint32_t line)
 /**
   * @}
   */ 
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

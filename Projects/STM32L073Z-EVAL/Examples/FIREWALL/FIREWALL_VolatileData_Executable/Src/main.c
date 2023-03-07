@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -105,7 +104,7 @@ int main(void)
        /* Mark that this is the first main() run */
        WRITE_REG( RTC->BKP4R, 0x1 );
        /* Initialize RTC back-up registers, used to log code progress
-          or unexpected software resets / uncorrect processing
+          or unexpected software resets / incorrect processing
           (can be used for debugging purposes)   */
        WRITE_REG( RTC->BKP0R, 0x0 ); 
        WRITE_REG( RTC->BKP1R, 0x0 );
@@ -412,5 +411,3 @@ void assert_failed(uint8_t *file, uint32_t line)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

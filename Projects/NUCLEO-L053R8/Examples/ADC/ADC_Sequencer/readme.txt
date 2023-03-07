@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -63,7 +62,7 @@ ADC conversion results:
 
 Board settings:
  - ADC rank 1 is configured to convert ADC_CHANNEL_4 (pin PA.04).
- - There are 2 posibilities:
+ - There are 2 possibilities:
    1 - If compilation switch "WAVEFORM_VOLTAGE_GENERATION_FOR_TEST" is defined:
      - The voltage input on ADC channel is provided from DAC channel.
      ADC and DAC channel have been chosen to have the same pad shared at device level: pin PA.04.
@@ -121,5 +120,5 @@ In order to make the program work, you must do the following :
  - Rebuild all files and load your image into target memory
  - Run the example
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

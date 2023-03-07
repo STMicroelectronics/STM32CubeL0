@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -84,7 +83,7 @@ int main(void)
    *  .Oversample.RightBitShift = 3 bit shift
    *  .Oversample.TriggeredMode = single trigger (each trigger, all the oversampling series are performed).
    *  ClockPrescaler            = PCLK clock with no division.
-   *  LowPowerAutoPowerOff      = Disabled (For this exemple continuous mode is enabled with software start)
+   *  LowPowerAutoPowerOff      = Disabled (For this example continuous mode is enabled with software start)
    *  LowPowerFrequencyMode     = Enabled (To be enabled only if ADC clock is lower than 2.8MHz) 
    *  LowPowerAutoWait          = Disabled (New conversion starts only when the previous conversion is completed)       
    *  Resolution                = 12 bit (increased to 16 bit with oversampler)
@@ -259,5 +258,3 @@ void assert_failed(uint8_t *file, uint32_t line)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

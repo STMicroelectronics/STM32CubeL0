@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -25,7 +24,7 @@ How to configure and use, through the LPTIM HAL API, the LPTIM peripheral
 to count pulses.
 
 To reduce power consumption, MCU enters stop mode after starting counting. Each
-time the counter reachs the maximum value (Period/Autoreload), an interruption
+time the counter reaches the maximum value (Period/Autoreload), an interruption
 is generated, the MCU is woke up from stop mode and LED3 toggles the last state.
   
 In this example Period value is set to 1000, so each time the counter counts
@@ -75,5 +74,5 @@ In order to make the program work, you must do the following :
  - Run the example 
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

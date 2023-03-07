@@ -6,15 +6,14 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
-  ******************************************************************************
+  *******************************************************************************
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -32,6 +31,8 @@
 #else
 #define SD_TIMEOUT 30 * 1000
 #endif
+
+#define SD_DEFAULT_BLOCK_SIZE 512
 
 /*
  * Depending on the usecase, the SD card initialization could be done at the
@@ -76,7 +77,7 @@ static DSTATUS SD_CheckStatus(BYTE lun)
 {
   Stat = STA_NOINIT;
 
-  if(BSP_SD_GetCardState() == BSP_SD_OK)
+  if(BSP_SD_GetCardState() == MSD_OK)
   {
     Stat &= ~STA_NOINIT;
   }
@@ -94,7 +95,7 @@ DSTATUS SD_initialize(BYTE lun)
   Stat = STA_NOINIT;
 #if !defined(DISABLE_SD_INIT)
 
-  if(BSP_SD_Init() == BSP_SD_OK)
+  if(BSP_SD_Init() == MSD_OK)
   {
     Stat = SD_CheckStatus(lun);
   }
@@ -126,12 +127,13 @@ DSTATUS SD_status(BYTE lun)
 DRESULT SD_read(BYTE lun, BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_ERROR;
+
   if(BSP_SD_ReadBlocks((uint32_t*)buff,
-                       (uint64_t)(sector * SD_BLOCK_SIZE),
-                       SD_BLOCK_SIZE, count) == MSD_OK)
+                       (uint32_t)(sector),
+                       count, SD_TIMEOUT) == MSD_OK)
   {
     /* wait until the read operation is finished */
-    while(BSP_SD_GetCardState()!= BSP_SD_OK)
+    while(BSP_SD_GetCardState()!= MSD_OK)
     {
     }
     res = RES_OK;
@@ -154,12 +156,11 @@ DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
   DRESULT res = RES_ERROR;
 
   if(BSP_SD_WriteBlocks((uint32_t*)buff,
-                        (uint64_t)(sector * SD_BLOCK_SIZE),
-                        SD_BLOCK_SIZE, count) == MSD_OK)
-
+                        (uint32_t)(sector),
+                        count, SD_TIMEOUT) == MSD_OK)
   {
     /* wait until the Write operation is finished */
-    while(BSP_SD_GetCardState() != BSP_SD_OK)
+    while(BSP_SD_GetCardState() != MSD_OK)
     {
     }
     res = RES_OK;
@@ -180,7 +181,7 @@ DRESULT SD_write(BYTE lun, const BYTE *buff, DWORD sector, UINT count)
 DRESULT SD_ioctl(BYTE lun, BYTE cmd, void *buff)
 {
   DRESULT res = RES_ERROR;
-  SD_CardInfo CardInfo;
+  BSP_SD_CardInfo CardInfo;
 
   if (Stat & STA_NOINIT) return RES_NOTRDY;
 
@@ -194,21 +195,21 @@ DRESULT SD_ioctl(BYTE lun, BYTE cmd, void *buff)
   /* Get number of sectors on the disk (DWORD) */
   case GET_SECTOR_COUNT :
     BSP_SD_GetCardInfo(&CardInfo);
-    *(DWORD*)buff = CardInfo.CardCapacity / SD_BLOCK_SIZE;
+    *(DWORD*)buff = CardInfo.LogBlockNbr;
     res = RES_OK;
     break;
 
   /* Get R/W sector size (WORD) */
   case GET_SECTOR_SIZE :
     BSP_SD_GetCardInfo(&CardInfo);
-    *(WORD*)buff = SD_BLOCK_SIZE;
+    *(WORD*)buff = CardInfo.LogBlockSize;
     res = RES_OK;
     break;
 
   /* Get erase block size in unit of sector (DWORD) */
   case GET_BLOCK_SIZE :
     BSP_SD_GetCardInfo(&CardInfo);
-    *(DWORD*)buff = CardInfo.CardBlockSize / SD_BLOCK_SIZE;
+    *(DWORD*)buff = CardInfo.LogBlockSize / SD_DEFAULT_BLOCK_SIZE;
 	res = RES_OK;
     break;
 
@@ -219,6 +220,3 @@ DRESULT SD_ioctl(BYTE lun, BYTE cmd, void *buff)
   return res;
 }
 #endif /* _USE_IOCTL == 1 */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-

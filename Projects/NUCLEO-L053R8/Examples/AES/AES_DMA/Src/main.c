@@ -8,13 +8,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -55,7 +54,7 @@ uint8_t aPlaintext[DATA_SIZE]  = {0x6b,0xc1,0xbe,0xe2,0x2e,0x40,0x9f,0x96,
                                   0xf6,0x9f,0x24,0x45,0xdf,0x4f,0x9b,0x17,
                                   0xad,0x2b,0x41,0x7b,0xe6,0x6c,0x37,0x10};
                                
-/* Cyphertext */               
+/* Ciphertext */               
 uint8_t aCyphertext[DATA_SIZE] = {0x3A,0xD7,0x7B,0xB4,0x0D,0x7A,0x36,0x60,
                                   0xA8,0x9E,0xCA,0xF3,0x24,0x66,0xEF,0x97,
                                   0xF5,0xD3,0xD5,0x85,0x03,0xB9,0x69,0x9D,
@@ -286,5 +285,3 @@ void assert_failed(uint8_t *file, uint32_t line)
 /**
   * @}
   */ 
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

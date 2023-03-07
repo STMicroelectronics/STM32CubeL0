@@ -6,15 +6,14 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
-  ******************************************************************************
+  *******************************************************************************
   */
 
 #define __PRESSURE_APP_C
@@ -134,7 +133,7 @@ KMODULE_RETURN _PressureWakeupUnConfig(void)
 /**
   * @brief  setup the pressure measurement application
   * @param  None.
-  * @note   set the memeory + Hw initialisation.  
+  * @note   set the memory + Hw initialisation.  
   * @retval None.
   */
 KMODULE_RETURN _PressureWakeupConfig(void)
@@ -232,7 +231,7 @@ void PressureWakeupDemo(void)
   {
     JoyState = BSP_JOY_GetState();
 
-    /* Change demo step and clear diplayed context */
+    /* Change demo step and clear displayed context */
     switch((int32_t)JoyState)
     {
       case JOY_SEL :
@@ -253,7 +252,7 @@ void PressureWakeupDemo(void)
           histoDisplay.title = (char*) &HistoOVSTitle;
           HistogramUpdateTitle(&histoDisplay);
 
-          /* Update the X decription of the histogram */
+          /* Update the X description of the histogram */
           histoDisplay.xDescr = (char*) &HistoXdescrOVS;
           HistogramUpdateXDescr(&histoDisplay);
           
@@ -271,11 +270,11 @@ void PressureWakeupDemo(void)
           histoDisplay.title = (char*) &HistoNOVSTitle;
           HistogramUpdateTitle(&histoDisplay);
 
-          /* Update the X decription of the histogram */
+          /* Update the X description of the histogram */
           histoDisplay.xDescr = (char*) &HistoXdescrNOVS;
           HistogramUpdateXDescr(&histoDisplay);
 
-          /* Update the Y decription of the histogram */
+          /* Update the Y description of the histogram */
           histoDisplay.yDescr = (char*) &HistoYdescr;
           HistogramUpdateYDescr(&histoDisplay);
           
@@ -302,11 +301,11 @@ void PressureWakeupDemo(void)
           histoDisplay.title = (char*) &CurveTitle;
           HistogramUpdateTitle(&histoDisplay);
 
-          /* Update the X decription of the histogram */
+          /* Update the X description of the histogram */
           histoDisplay.xDescr = (char*) &CurveXdescr;
           HistogramUpdateXDescr(&histoDisplay);
 
-          /* Update the Y decription of the histogram */
+          /* Update the Y description of the histogram */
           histoDisplay.yDescr = (char*) &CurveYdescr;
           HistogramUpdateYDescr(&histoDisplay);
           
@@ -744,14 +743,14 @@ static void StatHistogram(uint32_t * pHisto, uint32_t size,  uint32_t valueFirst
   
   average = average / hitSum;
     
-  /* Calculate standart deviation */
+  /* Calculate standard deviation */
   for (i=0 ; i < size ; i++)
   {
     std_deviation += pHisto[i] * pow(((i+1) - average), 2);
   }
   std_deviation = sqrt(std_deviation / hitSum);  
 
-  /* min max value with standart deviation */ 
+  /* min max value with standard deviation */ 
   min = (average) + valueFirstIndex - (std_deviation);
   max = min + 2  * (std_deviation) ;
   
@@ -867,6 +866,3 @@ void Error_Handler(void)
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-

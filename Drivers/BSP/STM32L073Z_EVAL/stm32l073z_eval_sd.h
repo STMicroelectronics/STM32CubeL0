@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright(c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+* Copyright (c) 2016 STMicroelectronics.
+* All rights reserved.
+*
+* This software is licensed under terms that can be found in the LICENSE file
+* in the root directory of this software component.
+* If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -147,6 +146,8 @@ typedef struct
   SD_CID Cid;
   uint32_t CardCapacity;  /* Card Capacity */
   uint32_t CardBlockSize; /* Card Block Size */
+  uint32_t LogBlockNbr;   /* Specifies the Card logical Capacity in blocks */
+  uint32_t LogBlockSize;  /* Specifies logical block size in bytes */
 } SD_CardInfo;
 
 /**
@@ -167,6 +168,11 @@ typedef struct
   */
 #define SD_PRESENT               ((uint8_t)0x01)
 #define SD_NOT_PRESENT           ((uint8_t)0x00)
+
+/** 
+  * @brief SD Card information structure 
+  */   
+#define BSP_SD_CardInfo SD_CardInfo
    
 /**
   * @}
@@ -223,4 +229,3 @@ uint8_t SD_IO_WriteByte(uint8_t Data);
 
 #endif /* __STM32L073Z_EVAL_SD_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

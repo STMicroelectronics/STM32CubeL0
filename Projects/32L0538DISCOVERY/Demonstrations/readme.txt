@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -36,7 +35,7 @@ Below you find the sequence to discover the demonstration :
     through USB connector CN1 to power the board. Then red led LD1 (COM) and
     LD2 (PWR) light up.
 
-  - The two signal LEDs blink continously.
+  - The two signal LEDs blink continuously.
 
   - A first display, for 2s, on the e-paper display (EPD) screen is showing the 
     name of the board and the demonstration firmware version. Then the main menu
@@ -47,7 +46,7 @@ Below you find the sequence to discover the demonstration :
     
     1. USB mouse Demo: connect a second USB cable type A to mini-B between CN3 and
        the PC, then see the mouse cursor movement according linear sensor position.
-       Each part of the linear sensor corresponds to a secific mouse movement 
+       Each part of the linear sensor corresponds to a specific mouse movement 
        direction(Right, Left, Up, Down).
        Press User Button B1 to go back to the main menu.
        
@@ -101,6 +100,6 @@ In order to make the program work, you must do the following :
 Note: You can load the binary file: "STM32L053C8-Discovery_Demo_V1.0.0.hex" available under "Binary"
 using your preferred in-system programming (ex. STM32 ST-LINK Utility, available for download from www.st.com).
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */
                                                           

@@ -7,15 +7,14 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
-  ******************************************************************************
+  *******************************************************************************
   */
 #define _HELP_APP_C
 
@@ -201,7 +200,7 @@ KMODULE_RETURN _HelpDemoExec(void)
 }
 
 /**
-* @brief  Generic informations for this demonstration.
+* @brief  Generic information for this demonstration.
 * @param  None.
 * @retval None.
 */
@@ -241,9 +240,9 @@ static void GenericHelpApp(void)
 }
 
 /**
-* @brief  Help regarding the system configuration. It gives informations
+* @brief  Help regarding the system configuration. It gives information
 *         regarding the FMX version, the HAL version, the System clock
-*         configuration and some other informations.
+*         configuration and some other information.
 * @param  None.
 * @retval None.
 */
@@ -321,7 +320,7 @@ static void SystemHelpApp(void)
 }
 
 /**
-* @brief  It gives informations about the Board setup needed when running the application.
+* @brief  It gives information about the Board setup needed when running the application.
 * @param  None.
 * @retval None.
 */
@@ -333,7 +332,7 @@ static void BoardHelpApp(void)
 }
 
 /**
-* @brief  It gives informations about the LPuart application launched by this demo.
+* @brief  It gives information about the LPuart application launched by this demo.
 * @param  None.
 * @retval None.
 */
@@ -344,7 +343,7 @@ static void LpUartHelpApp(void)
 }
 
 /**
-* @brief  It gives informations about the Low power application launched by
+* @brief  It gives information about the Low power application launched by
 *         this demo.
 * @param  None.
 * @retval None.
@@ -357,7 +356,7 @@ static void LowPowerHelpApp(void)
 }
 
 /**
-* @brief  It gives informations about the Thermometer application
+* @brief  It gives information about the Thermometer application
 *         launched by this demo.
 * @param  None.
 * @retval None.
@@ -370,7 +369,7 @@ static void ThermometerHelpApp(void)
 }
 
 /**
-* @brief  It gives informations about the Lc sensor application launched by this demo.
+* @brief  It gives information about the Lc sensor application launched by this demo.
 * @param  None.
 * @retval None.
 */
@@ -381,7 +380,7 @@ static void LcSensorHelpApp(void)
 }
 
 /**
-* @brief  It gives informations about the Pressure application launched by this demo.
+* @brief  It gives information about the Pressure application launched by this demo.
 * @param  None.
 * @retval None.
 */
@@ -466,6 +465,3 @@ static void displayTitleAndMsg(char *title, char *msg)
 /**
 * @}
 */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-

@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -83,7 +82,7 @@ void SD_demo(void)
       
       /* Fill the buffer to write */
       Fill_Buffer(aTxBuffer, BUFFER_WORDS_SIZE, 0x22FF);
-      SD_state = BSP_SD_WriteBlocks(aTxBuffer, BLOCK_START_ADDR, BLOCKSIZE, NUM_OF_BLOCKS);
+      SD_state = BSP_SD_WriteBlocks(aTxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS, BSP_SD_TIMEOUT);
       
       if(SD_state != MSD_OK)
       {
@@ -93,7 +92,7 @@ void SD_demo(void)
       else
       {
         BSP_LCD_DisplayStringAt(4, 112, (uint8_t *)"SD WRITE: OK", LEFT_MODE);
-        SD_state = BSP_SD_ReadBlocks(aRxBuffer, BLOCK_START_ADDR, BLOCKSIZE, NUM_OF_BLOCKS);
+        SD_state = BSP_SD_ReadBlocks(aRxBuffer, BLOCK_START_ADDR, NUM_OF_BLOCKS, BSP_SD_TIMEOUT);
         if(SD_state != MSD_OK)
         {
           BSP_LCD_DisplayStringAt(4, 124, (uint8_t *)"SD READ: FAILED", LEFT_MODE);
@@ -203,5 +202,3 @@ static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buffer
 /**
   * @}
   */
-  
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

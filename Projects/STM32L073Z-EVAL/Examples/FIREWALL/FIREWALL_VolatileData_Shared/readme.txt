@@ -9,13 +9,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   @endverbatim
@@ -30,7 +29,7 @@ The non-volatile data segment is located in Flash memory.
 In the example Firewall initialization, the protected volatile data segment is 
 first defined as shared so that it can be accessed by non protected code.
 
-For Firewall demonstration's sake, two Firewall sofware resets are purposedly
+For Firewall demonstration's sake, two Firewall software resets are purposely
 triggered.
 - the first one in accessing the protected non-volatile data segment
 - the second one in accessing the protected volatile data segment once 
@@ -69,7 +68,7 @@ The Firewall-protected memory segments are defined as follows
  - the array located in the volatile data segment is updated as expected
  - no Firewall reset occurs when unprotected code segment accesses the array.
  
- Next, while the Firewall is closed, a Firewall reset is purposedly triggered
+ Next, while the Firewall is closed, a Firewall reset is purposely triggered
  in accessing an array located in the protected non-volatile data segment.
  
  This leads to a software reset and a second main() run.
@@ -77,12 +76,12 @@ The Firewall-protected memory segments are defined as follows
  same way but this time, the protected code when called disables the volatile 
  data sharing feature.
  
- A second Firewall reset is purposedly triggered in accessing the no more
+ A second Firewall reset is purposely triggered in accessing the no more
  shared array located in the protected volatile data segment.
  
  If the code unrolls as expected, LED1 is turned on.
  If an error occurs (unexpected Firewall reset or any other unexpected
- result), LED1 blinks in transmiting a sequence of three dots, three dashes, three dots.
+ result), LED1 blinks in transmitting a sequence of three dots, three dashes, three dots.
 
 
  The Firewall-triggered software resets lead to resort to RTC back-up registers
@@ -161,5 +160,5 @@ In order to make the program work, you must do the following :
  - Run the example
 
 
- * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
+
  */

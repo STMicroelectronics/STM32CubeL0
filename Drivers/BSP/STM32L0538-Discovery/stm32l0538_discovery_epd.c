@@ -388,7 +388,7 @@ void BSP_EPD_RefreshDisplay(void)
   /* Poll on the BUSY signal and wait for the EPD to be ready */
   while (HAL_GPIO_ReadPin(EPD_BUSY_GPIO_PORT, EPD_BUSY_PIN) != (uint16_t)RESET);
 
-  /*  EPD reset pin mamagement */
+  /*  EPD reset pin management */
   EPD_RESET_HIGH();
 
   /* Add a 10 ms Delay after EPD pin Reset */
