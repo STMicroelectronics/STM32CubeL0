@@ -22,3 +22,31 @@
 	path = Drivers/BSP/STM32L0538-Discovery
 	url = https://github.com/STMicroelectronics/32l0538discovery-bsp.git
 	branch = main
+[submodule "Drivers/BSP/Components/Common"]
+	path = Drivers/BSP/Components/Common
+	url = https://github.com/STMicroelectronics/stm32-bsp-common
+	branch = main
+[submodule "Drivers/BSP/Components/gde021a1"]
+	path = Drivers/BSP/Components/gde021a1
+	url = https://github.com/STMicroelectronics/stm32-gde021a1
+	branch = main
+[submodule "Drivers/BSP/Components/gdem0213b74"]
+	path = Drivers/BSP/Components/gdem0213b74
+	url = https://github.com/STMicroelectronics/stm32-gdem0213b74
+	branch = main
+[submodule "Drivers/BSP/Components/hx8347d"]
+	path = Drivers/BSP/Components/hx8347d
+	url = https://github.com/STMicroelectronics/stm32-hx8347d
+	branch = main
+[submodule "Drivers/BSP/Components/mfxstm32l152"]
+	path = Drivers/BSP/Components/mfxstm32l152
+	url = https://github.com/STMicroelectronics/stm32-mfxstm32l152
+	branch = main
+[submodule "Drivers/BSP/Components/st7735"]
+	path = Drivers/BSP/Components/st7735
+	url = https://github.com/STMicroelectronics/stm32-st7735
+	branch = main
+[submodule "Drivers/BSP/Components/stlm75"]
+	path = Drivers/BSP/Components/stlm75
+	url = https://github.com/STMicroelectronics/stm32-stlm75
+	branch = main
