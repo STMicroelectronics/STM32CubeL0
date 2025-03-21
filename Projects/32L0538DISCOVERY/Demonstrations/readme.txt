@@ -83,6 +83,10 @@ Below you find the sequence to discover the demonstration :
     
   - This example has been tested with STM32L053C8-Discovery RevB board and can be
     easily tailored to any other supported device and development board.
+
+  - One of the following flags must be defined in the preprocessor Options in order to select the target board revision :
+  - USE_STM32L0538_DISCO Applicable for all boards execept STM32L0538 DISCOVERY REV B-03
+  - USE_STM32L0538_DISCO_REV_B03 Applicable only for STM32L0538 DISCOVERY REV B-03
     
   - Ensure that both CN4 jumpers are set to on (Discovery mode)
     and JP4 is in the ON position.   

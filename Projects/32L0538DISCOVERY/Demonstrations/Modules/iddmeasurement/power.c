@@ -420,6 +420,11 @@ void Idd_LPSleep_process(void)
   HAL_PWREx_EnableFastWakeUp();
 
   /* Enable the power down mode during Sleep mode */
+  /* Note: When Flash power down mode is enabled during Sleep mode, the Flash needs longer
+           recovery time.As a result, the first data read or instruction fetch from Flash may
+           be incorrect.To avoid this issue, it is recommended to comment the following line.
+           Please refer to the errata sheet ES0251 section 2.1.5 for more details.
+  */
   __HAL_FLASH_SLEEP_POWERDOWN_ENABLE();
 
   /* Deinitialize the I2C */

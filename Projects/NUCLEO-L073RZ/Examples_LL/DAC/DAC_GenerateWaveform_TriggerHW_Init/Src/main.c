@@ -534,7 +534,7 @@ void SystemClock_Config(void)
   /* MSI configuration and activation */
   LL_RCC_PLL_Disable();
   /* Set new latency */
-  LL_FLASH_SetLatency(LL_FLASH_LATENCY_1);
+  LL_FLASH_SetLatency(LL_FLASH_LATENCY_0);
 
   LL_RCC_MSI_Enable();
   while(LL_RCC_MSI_IsReady() != 1) 

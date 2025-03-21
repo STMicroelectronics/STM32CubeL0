@@ -72,12 +72,21 @@ void Menu_Process(void)
   {
   case BACKGROUND_MENU:
     BSP_EPD_SetFont(&Font16);
+    #if defined (USE_STM32L0538_DISCO_REV_B03)
+    BSP_EPD_DrawImage(1, 0, 56,120, Background_pic);
+    BSP_EPD_DisplayStringAt(10, 11, (uint8_t*)"STM32L053", RIGHT_MODE);
+    BSP_EPD_SetFont(&Font12);
+    BSP_EPD_DisplayStringAt(149, 7, (uint8_t*)"DISCOVERY", LEFT_MODE);
+    BSP_EPD_DisplayStringAt(131, 3, (uint8_t*)"DEMONSTRATION", LEFT_MODE);
+    BSP_EPD_DisplayStringAt(154, 0, (uint8_t*)"V1.1.0", LEFT_MODE);
+    #else /* USE_STM32L0538_DISCO */
     BSP_EPD_DrawImage(0, 0, 72, 172, Background_pic);
     BSP_EPD_DisplayStringAt(0, 13, (uint8_t*)"STM32L053", RIGHT_MODE);
     BSP_EPD_SetFont(&Font12);
     BSP_EPD_DisplayStringAt(87, 8, (uint8_t*)"DISCOVERY", LEFT_MODE);
     BSP_EPD_DisplayStringAt(71, 3, (uint8_t*)"DEMONSTRATION", LEFT_MODE);
     BSP_EPD_DisplayStringAt(94, 0, (uint8_t*)"V1.0.0", LEFT_MODE);
+    #endif /* USE_STM32L0538_DISCO_REV_B03 */
     BSP_EPD_RefreshDisplay();
     HAL_Delay(2000);
     menu_state = MAIN_MENU;
@@ -86,6 +95,16 @@ void Menu_Process(void)
   /* main menu */
   case MAIN_MENU:
     BSP_EPD_Clear(EPD_COLOR_WHITE);
+    #if defined (USE_STM32L0538_DISCO_REV_B03)
+    BSP_EPD_DrawImage(5, 1, 36, 62, Mouse_pic);
+    BSP_EPD_DrawImage(188, 0, 45, 43, Batery_pic);
+    BSP_EPD_DrawImage(65, 0, 12, 102, Slider_pic);
+    BSP_EPD_SetFont(&Font12);
+    BSP_EPD_DisplayStringAt(4, 12, (uint8_t*)"STM32L053 Demonstration", CENTER_MODE);
+    BSP_EPD_DisplayStringAt(67, 7, (uint8_t*)"USE LTS to", LEFT_MODE);
+    BSP_EPD_DisplayStringAt(67, 4, (uint8_t*)"Select Sub-Demo", LEFT_MODE);
+    BSP_EPD_DrawRect(2, 11, 245, 4);
+    #else /* USE_STM32L0538_DISCO */
     BSP_EPD_DrawImage(5, 0, 48, 48, Mouse_pic);
     BSP_EPD_DrawImage(130, 0, 48, 26, Batery_pic);
     BSP_EPD_DrawImage(60, 0, 16, 60, Slider_pic);
@@ -94,6 +113,7 @@ void Menu_Process(void)
     BSP_EPD_DisplayStringAt(56, 7, (uint8_t*)"USE LTS to", LEFT_MODE);
     BSP_EPD_DisplayStringAt(53, 4, (uint8_t*)"Select Demo", LEFT_MODE);
     BSP_EPD_DrawRect(2, 12, 166, 5);
+    #endif /* USE_STM32L0538_DISCO_REV_B03 */
     BSP_EPD_RefreshDisplay();
     menu_state = MODULE_MENU;
     break;
@@ -122,6 +142,16 @@ void Menu_Process(void)
 
   case USB_MENU:
     BSP_EPD_Clear(EPD_COLOR_WHITE);
+    #if defined (USE_STM32L0538_DISCO_REV_B03)
+    BSP_EPD_DrawImage(25, 4, 23, 200, FullSlider_pic);
+    BSP_EPD_SetFont(&Font16);
+    BSP_EPD_DisplayStringAt(0, 11, (uint8_t*)"STM32L053 USB Demo", CENTER_MODE);
+    BSP_EPD_DisplayStringAt(10, 0, (uint8_t*)"LEFT RIGHT UP DOWN", LEFT_MODE);
+    BSP_EPD_DrawRect(7, 11, 235, 4);
+    BSP_EPD_DrawRect(210, 0, 35, 3);
+    BSP_EPD_SetFont(&Font8);
+    BSP_EPD_DisplayStringAt(211, 1, (uint8_t*)"B1 Ex", LEFT_MODE);
+    #else /* USE_STM32L0538_DISCO */
     BSP_EPD_DrawImage(13, 4, 28, 146, FullSlider_pic);
     BSP_EPD_SetFont(&Font12);
     BSP_EPD_DisplayStringAt(0, 13, (uint8_t*)"STM32L053 USB Demo", CENTER_MODE);
@@ -130,6 +160,7 @@ void Menu_Process(void)
     BSP_EPD_DrawRect(145, 0, 26, 4);
     BSP_EPD_SetFont(&Font8);
     BSP_EPD_DisplayStringAt(146, 1, (uint8_t*)"B1 Ex", LEFT_MODE);
+    #endif /* USE_STM32L0538_DISCO_REV_B03 */
     BSP_EPD_RefreshDisplay();
     MyLinRots[0].p_Data->Position = 0;
 
@@ -162,6 +193,19 @@ void Menu_Process(void)
     BSP_LED_Off(LED3);
     /* Power Main IDD Menu ****************************************************/
     BSP_EPD_Clear(EPD_COLOR_WHITE);
+    #if defined (USE_STM32L0538_DISCO_REV_B03)
+    BSP_EPD_DrawImage(35, 0, 12, 102, Slider_pic);
+    BSP_EPD_DrawImage(3, 3, 32, 32, Run_pic);
+    BSP_EPD_DrawImage(70, 3, 32, 29, Sleep_pic);
+    BSP_EPD_DrawImage(140, 3, 32, 29, LPSleep_pic);
+    BSP_EPD_DrawImage(200, 3, 32, 32, Stop_pic);
+    BSP_EPD_SetFont(&Font16);
+    BSP_EPD_DisplayStringAt(0, 11, (uint8_t*)"STM32L053 IDD Demo", CENTER_MODE);
+    BSP_EPD_DrawRect(7, 11, 235, 4);
+    BSP_EPD_DrawRect(182, 0,65, 3);
+    BSP_EPD_SetFont(&Font8);
+    BSP_EPD_DisplayStringAt(185, 1, (uint8_t*)"B1 to Exit", LEFT_MODE);
+    #else /* USE_STM32L0538_DISCO */
     BSP_EPD_DrawImage(30, 0, 16, 60, Slider_pic);
     BSP_EPD_DrawImage(3, 4, 32, 32, Run_pic);
     BSP_EPD_DrawImage(50, 4, 32, 29, Sleep_pic);
@@ -173,6 +217,7 @@ void Menu_Process(void)
     BSP_EPD_DrawRect(113, 0, 57, 3);
     BSP_EPD_SetFont(&Font8);
     BSP_EPD_DisplayStringAt(116, 1, (uint8_t*)"B1 to Exit", LEFT_MODE);
+    #endif /* USE_STM32L0538_DISCO_REV_B03 */
     BSP_EPD_RefreshDisplay();
    
     MyLinRots[0].p_Data->Position = 0;
@@ -191,6 +236,16 @@ void Menu_Process(void)
       {
         Idd_Run_process();
         BSP_EPD_Clear(EPD_COLOR_WHITE);
+        #if defined (USE_STM32L0538_DISCO_REV_B03)
+        BSP_EPD_SetFont(&Font16);
+        BSP_EPD_DisplayStringAt(0, 10, (uint8_t*)"MCU in Run Mode", CENTER_MODE);
+        BSP_EPD_DrawRect(7, 10, 235, 5);
+        BSP_EPD_DisplayStringAt(8, 5, (uint8_t*)"Current consumption", LEFT_MODE);
+        BSP_EPD_DisplayStringAt(8, 1, str, LEFT_MODE);
+        BSP_EPD_DrawRect(182, 0, 65, 3);
+        BSP_EPD_SetFont(&Font8);
+        BSP_EPD_DisplayStringAt(185, 1, (uint8_t*)"B1 to Exit", LEFT_MODE);
+        #else /* USE_STM32L0538_DISCO */
         BSP_EPD_SetFont(&Font12);
         BSP_EPD_DisplayStringAt(0, 13, (uint8_t*)"MCU in Run Mode", CENTER_MODE);
         BSP_EPD_DrawRect(2, 12, 166, 5);
@@ -199,6 +254,7 @@ void Menu_Process(void)
         BSP_EPD_DrawRect(113, 0, 57, 4);
         BSP_EPD_SetFont(&Font8);
         BSP_EPD_DisplayStringAt(116, 1, (uint8_t*)"B1 to Exit", LEFT_MODE);
+        #endif /* USE_STM32L0538_DISCO_REV_B03 */
         BSP_EPD_RefreshDisplay();
       }
       
@@ -207,9 +263,15 @@ void Menu_Process(void)
       {
         /* Display before entering Sleep mode */
         BSP_EPD_Clear(EPD_COLOR_WHITE);
+        #if defined (USE_STM32L0538_DISCO_REV_B03)
+        BSP_EPD_SetFont(&Font16);
+        BSP_EPD_DisplayStringAt(0, 11, (uint8_t*)"MCU in Sleep Mode", CENTER_MODE);
+        BSP_EPD_DrawRect(7, 10, 235, 5);
+        #else /* USE_STM32L0538_DISCO */
         BSP_EPD_SetFont(&Font12);
         BSP_EPD_DisplayStringAt(0, 13, (uint8_t*)"MCU in Sleep Mode", CENTER_MODE);
         BSP_EPD_DrawRect(2, 12, 166, 5);
+        #endif /* USE_STM32L0538_DISCO_REV_B03 */
         BSP_EPD_RefreshDisplay();
         
         /* Execute Sleep */
@@ -217,6 +279,16 @@ void Menu_Process(void)
         
         /* Display after wakeup from Sleep mode */
         BSP_EPD_Clear(EPD_COLOR_WHITE);
+        #if defined (USE_STM32L0538_DISCO_REV_B03)
+        BSP_EPD_SetFont(&Font16);
+        BSP_EPD_DisplayStringAt(0, 11, (uint8_t*)"Wake up from Sleep", CENTER_MODE);
+        BSP_EPD_DrawRect(7, 10, 235, 5);
+        BSP_EPD_DisplayStringAt(8, 5, (uint8_t*)"Current consumption", LEFT_MODE);
+        BSP_EPD_DisplayStringAt(8, 1, str, LEFT_MODE);
+        BSP_EPD_DrawRect(182, 0,65, 3);
+        BSP_EPD_SetFont(&Font8);
+        BSP_EPD_DisplayStringAt(185, 1, (uint8_t*)"B1 to Exit", LEFT_MODE);
+        #else /* USE_STM32L0538_DISCO */
         BSP_EPD_DisplayStringAt(0, 13, (uint8_t*)"Wake up from Sleep", CENTER_MODE);
         BSP_EPD_DrawRect(2, 12, 166, 5);
         BSP_EPD_DisplayStringAt(8, 7, (uint8_t*)"Current consumption", LEFT_MODE);
@@ -224,6 +296,7 @@ void Menu_Process(void)
         BSP_EPD_DrawRect(113, 0, 57, 4);
         BSP_EPD_SetFont(&Font8);
         BSP_EPD_DisplayStringAt(116, 1, (uint8_t*)"B1 to Exit", LEFT_MODE);
+        #endif /* USE_STM32L0538_DISCO_REV_B03 */
         BSP_EPD_RefreshDisplay();
       }
       
@@ -232,9 +305,15 @@ void Menu_Process(void)
       {
         /* Display before entering LP Sleep mode */
         BSP_EPD_Clear(EPD_COLOR_WHITE);
+        #if defined (USE_STM32L0538_DISCO_REV_B03)
+        BSP_EPD_SetFont(&Font16);
+        BSP_EPD_DisplayStringAt(0, 11, (uint8_t*)"MCU in LPSleep Mode", CENTER_MODE);
+        BSP_EPD_DrawRect(7, 10, 235, 5);
+        #else /* USE_STM32L0538_DISCO */
         BSP_EPD_SetFont(&Font12);
         BSP_EPD_DisplayStringAt(0, 13, (uint8_t*)"MCU in LPSleep Mode", CENTER_MODE);
         BSP_EPD_DrawRect(2, 12, 166, 5);
+        #endif /* USE_STM32L0538_DISCO_REV_B03 */
         BSP_EPD_RefreshDisplay();
          
         /* Execute LP SLEEP */
@@ -242,6 +321,16 @@ void Menu_Process(void)
         
         /* Display after wakeup from LP Sleep mode */
         BSP_EPD_Clear(EPD_COLOR_WHITE);
+        #if defined (USE_STM32L0538_DISCO_REV_B03)
+        BSP_EPD_SetFont(&Font16);
+        BSP_EPD_DisplayStringAt(0, 11, (uint8_t*)"Wake up from LPSleep", CENTER_MODE);
+        BSP_EPD_DrawRect(7, 10, 235, 5);
+        BSP_EPD_DisplayStringAt(8, 5, (uint8_t*)"Current consumption", LEFT_MODE);
+        BSP_EPD_DisplayStringAt(8, 1, str, LEFT_MODE);
+        BSP_EPD_DrawRect(182, 0,65, 3);
+        BSP_EPD_SetFont(&Font8);
+        BSP_EPD_DisplayStringAt(185, 1, (uint8_t*)"B1 to Exit", LEFT_MODE);
+        #else /* USE_STM32L0538_DISCO */
         BSP_EPD_DisplayStringAt(0, 13, (uint8_t*)"Wake up from LPSleep", CENTER_MODE);
         BSP_EPD_DrawRect(2, 12, 166, 5);
         BSP_EPD_DisplayStringAt(8, 7, (uint8_t*)"Current consumption", LEFT_MODE);
@@ -249,6 +338,7 @@ void Menu_Process(void)
         BSP_EPD_DrawRect(113, 0, 57, 4);
         BSP_EPD_SetFont(&Font8);
         BSP_EPD_DisplayStringAt(116, 1, (uint8_t*)"B1 to Exit", LEFT_MODE);
+        #endif /* USE_STM32L0538_DISCO_REV_B03 */
         BSP_EPD_RefreshDisplay();
       }
       /* Stop menu ************************************************************/
@@ -256,9 +346,15 @@ void Menu_Process(void)
       {
         /* Display before entering Stop mode */
         BSP_EPD_Clear(EPD_COLOR_WHITE);
+        #if defined (USE_STM32L0538_DISCO_REV_B03)
+        BSP_EPD_SetFont(&Font16);
+        BSP_EPD_DisplayStringAt(0, 11, (uint8_t*)"MCU in Stop Mode", CENTER_MODE);
+        BSP_EPD_DrawRect(7, 10, 235, 5);
+        #else /* USE_STM32L0538_DISCO */
         BSP_EPD_SetFont(&Font12);
         BSP_EPD_DisplayStringAt(0, 13, (uint8_t*)"MCU in Stop Mode", CENTER_MODE);
         BSP_EPD_DrawRect(2, 12, 166, 5);
+        #endif /* USE_STM32L0538_DISCO_REV_B03 */
         BSP_EPD_RefreshDisplay();
         
         /* Execute STOP Process */
@@ -266,6 +362,16 @@ void Menu_Process(void)
         
         /* Display after wakeup from Stop mode */
         BSP_EPD_Clear(EPD_COLOR_WHITE);
+        #if defined (USE_STM32L0538_DISCO_REV_B03)
+        BSP_EPD_SetFont(&Font16);
+        BSP_EPD_DisplayStringAt(0, 11, (uint8_t*)"Wake up from STOP", CENTER_MODE);
+        BSP_EPD_DrawRect(7, 10, 235, 5);
+        BSP_EPD_DisplayStringAt(8, 5, (uint8_t*)"Current consumption", LEFT_MODE);
+        BSP_EPD_DisplayStringAt(8, 1, str, LEFT_MODE);
+        BSP_EPD_DrawRect(182, 0,65, 3);
+        BSP_EPD_SetFont(&Font8);
+        BSP_EPD_DisplayStringAt(185, 1, (uint8_t*)"B1 to Exit", LEFT_MODE);
+        #else /* USE_STM32L0538_DISCO */
         BSP_EPD_DisplayStringAt(0, 13, (uint8_t*)"Wake up from STOP", CENTER_MODE);
         BSP_EPD_DrawRect(2, 12, 166, 5);
         BSP_EPD_DisplayStringAt(8, 7, (uint8_t*)"Current consumption", LEFT_MODE);
@@ -273,6 +379,7 @@ void Menu_Process(void)
         BSP_EPD_DrawRect(113, 0, 57, 4);
         BSP_EPD_SetFont(&Font8);
         BSP_EPD_DisplayStringAt(116, 1, (uint8_t*)"B1 to Exit", LEFT_MODE);
+        #endif /* USE_STM32L0538_DISCO_REV_B03 */
         BSP_EPD_RefreshDisplay();
       }
       

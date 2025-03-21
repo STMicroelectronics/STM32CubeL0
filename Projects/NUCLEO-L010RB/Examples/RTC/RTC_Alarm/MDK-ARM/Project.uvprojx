@@ -334,7 +334,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32L073xx,USE_STM32L0XX_NUCLEO,USE_HAL_DRIVER</Define>
+              <Define>STM32L010xB,USE_STM32L0XX_NUCLEO,USE_HAL_DRIVER</Define>
               <Undefine></Undefine>
               <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32L0xx/Include;../../../../../../Drivers/STM32L0xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32L0xx_Nucleo</IncludePath>
             </VariousControls>

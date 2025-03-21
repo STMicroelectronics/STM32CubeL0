@@ -1398,6 +1398,11 @@ static void ManageSleepLowPowerMode(uint32_t mode,clockConfigTypeEnum clockConfi
    HAL_PWREx_EnableFastWakeUp();
 
   /* Enable the power down mode during Sleep mode */
+  /* Note: When Flash power down mode is enabled during Sleep mode, the Flash needs longer
+           recovery time. As a result, the first data read or instruction fetch from Flash may
+           be incorrect. To avoid this issue, it is recommended to comment the following line.
+           Please refer to the errata sheet ES0292 section 2.1.2 for more details.
+  */
   __HAL_FLASH_SLEEP_POWERDOWN_ENABLE();
 
   /* Start the measurement */
@@ -1447,6 +1452,11 @@ static void ManageSleepMode(uint32_t mode)
  {
 
   /* Enable the power down mode during Sleep mode */
+  /* Note: When Flash power down mode is enabled during Sleep mode, the Flash needs longer
+           recovery time. As a result, the first data read or instruction fetch from Flash may
+           be incorrect. To avoid this issue, it is recommended to comment the following line.
+           Please refer to the errata sheet ES0292 section 2.1.2 for more details.
+  */
   __HAL_FLASH_SLEEP_POWERDOWN_ENABLE();
 
   __HAL_RCC_PWR_CLK_ENABLE();

@@ -1045,6 +1045,9 @@
         <file>
           <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\gde021a1\gde021a1.c</name>
         </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\gdem0213b74\gdem0213b74.c</name>
+        </file>
       </group>
       <group>
         <name>STM32L0538-Discovery</name>

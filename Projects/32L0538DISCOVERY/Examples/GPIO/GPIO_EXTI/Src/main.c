@@ -135,7 +135,7 @@ static void EXTILine0_1_Config(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
   
   /* Configure PA0 pin as input floating */
-  GPIO_InitStructure.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStructure.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStructure.Pull = GPIO_NOPULL;
   GPIO_InitStructure.Pin = GPIO_PIN_0;
   GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_HIGH  ;

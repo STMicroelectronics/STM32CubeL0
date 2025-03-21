@@ -95,6 +95,11 @@ int main(void)
     BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
 
     /* Enable the power down mode during Sleep mode */
+    /* Note: When Flash power down mode is enabled during Sleep mode, the Flash needs longer
+             recovery time. As a result, the first data read or instruction fetch from Flash may
+             be incorrect. To avoid this issue, it is recommended to comment the following line.
+             Please refer to the errata sheet ES0292 section 2.1.2 for more details.
+    */
     __HAL_FLASH_SLEEP_POWERDOWN_ENABLE();
 
     /* Suspend Tick increment to prevent wakeup by Systick interrupt.         */
